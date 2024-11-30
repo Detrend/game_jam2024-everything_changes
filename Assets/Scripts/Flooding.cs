@@ -8,6 +8,15 @@ public class Flooding : MonoBehaviour
     Material _material;
 
     public float _flooding;
+
+    public float waterCapacity = 1f;
+
+
+    Vector3 rayFrom;
+    Vector3 rayTo;
+    public float waveAmount = 1f;
+
+
     public float FloodingAmount
     {
         get => _flooding;
@@ -25,5 +34,17 @@ public class Flooding : MonoBehaviour
         _block = transform.parent.gameObject.GetComponent<Block>();
         _material = GetComponent<SpriteRenderer>().material;
         FloodingAmount = _flooding;
+        rayFrom = _material.GetVector("_RayFrom");
+        rayTo = _material.GetVector("_RayTo");
+    }
+
+    void Update() => MyUpdate();
+
+    protected virtual void MyUpdate()
+    {
+        waveAmount *= Mathf.Pow(0.4f, Time.deltaTime);
+        float balance = waveAmount * Mathf.Sin(Time.time * 6f);
+        _material.SetVector("_RayFrom", new Vector3(rayFrom.x, rayFrom.y * Mathf.Exp(balance), rayFrom.z));
+        _material.SetVector("_RayTo", new Vector3(rayTo.x, rayTo.y / Mathf.Exp(balance), rayTo.z));
     }
 }

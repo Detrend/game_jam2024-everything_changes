@@ -24,9 +24,17 @@ public class BlockRecord
 
 public static class Search
 {
+    public static int belongingTracker = 0;
+
     public static void ResetSearchFlags(IEnumerable<Block> blocks)
     {
         foreach (Block b in blocks) b.boxSearchData.visited = false;
+    }
+
+    public static void SetBelongingFlag(IEnumerable<Block> blocks, int value)
+    {
+        foreach (Block b in blocks)
+            b.boxSearchData.belong = value;
     }
 
 
