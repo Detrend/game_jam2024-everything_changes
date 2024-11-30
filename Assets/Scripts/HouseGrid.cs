@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class BlockRecord
 {
-    readonly Block block;
-    readonly IVector2 offset;
+    readonly public Block block;
+    readonly public IVector2 offset;
 
     public BlockRecord(Block b, IVector2 offset)
     {
@@ -37,8 +37,8 @@ public class HouseGrid : MonoBehaviour
 
     void Start()
     {
-        data = new BlockRecord[0, 0];
-        _BBox = new BBox(IVector2.Zero, IVector2.Zero);
+        data = new BlockRecord[20, 40];
+        _BBox = new BBox(new (-10, -10), new(20, 40));
     }
 
     public void AddBlock(Block block, IVector2 pos)
@@ -49,17 +49,26 @@ public class HouseGrid : MonoBehaviour
             return;
         }
         block.Place(pos);
-        if (!_BBox.Contains(block.BBox))
-        {
-            BBox new_bbox = _BBox.Extend(block.BBox);
-            BlockRecord[,] new_data = new BlockRecord[new_bbox.Size.X, new_bbox.Size.Y];
-            CopyData(data, new_data, _BBox.From - new_bbox.From);
-            _BBox = new_bbox;
-        }
+        //if (!_BBox.Contains(block.BBox))
+        //{
+        //    BBox new_bbox = _BBox.Extend(block.BBox);
+        //    BlockRecord[,] new_data = new BlockRecord[new_bbox.Size.X, new_bbox.Size.Y];
+        //    CopyData(data, new_data, _BBox.From - new_bbox.From);
+        //    _BBox = new_bbox;
+        //}
 
         foreach (IVector2 dif in block.size.AllCoordinates)
         {
             this[pos + dif] = new BlockRecord(block, dif);
+        }
+    }
+
+    public void RemoveBlockAt(IVector2 pos)
+    {
+        Block b = this[pos].block;
+        foreach (IVector2 c in b.BBox.AllCoordinates)
+        {
+            this[c] = null;
         }
     }
 
@@ -70,7 +79,7 @@ public class HouseGrid : MonoBehaviour
             for (int j = 0; j < block.size.Y; j++)
             {
                 IVector2 check = new IVector2(i, j) + pos;
-                if (_BBox.Contains(check) && this[check] != null) return false;
+                if (!_BBox.Contains(check) || this[check] != null) return false;
             }
         }
         return true;

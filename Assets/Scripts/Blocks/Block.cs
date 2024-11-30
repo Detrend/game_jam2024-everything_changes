@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
 
 
-
-public readonly struct IVector2
+[Serializable]
+public struct IVector2
 {
-    public readonly int X, Y;
+    public int X, Y;
     public IVector2(int x, int y)
     {
         X = x;
@@ -62,9 +63,15 @@ public readonly struct IVector2
         return false;
     }
 
-    public override int GetHashCode() => HashCode.Combine(X, Y);
+    public readonly override int GetHashCode() => HashCode.Combine(X, Y);
 
-    public Vector2 ToVec() => new(X, Y);
+    public readonly Vector2 ToVec() => new(X, Y);
+
+
+    public override string ToString()
+    {
+        return "(" + X.ToString() + ", " + Y.ToString() + ")";
+    }
 }
 
 
@@ -94,7 +101,7 @@ public readonly struct BBox
         );
     }
 
-    public bool Contains(BBox b) => From >= b.From && To <= b.To;
+    public bool Contains(BBox b) => From <= b.From && To >= b.To;
 
     public bool Contains(IVector2 a) => a.X >= From.X && a.X < To.X && a.Y >= From.Y && a.Y < To.Y;
 
@@ -115,6 +122,15 @@ public readonly struct BBox
     }
 
     public override int GetHashCode() => HashCode.Combine(From.GetHashCode(), To.GetHashCode());
+
+
+    public IEnumerable<IVector2> AllCoordinates
+    {
+        get
+        {
+            foreach (IVector2 x in Size.AllCoordinates) yield return x + From;
+        }
+    }
 }
 
 
@@ -137,7 +153,20 @@ public class Block : MonoBehaviour
     bool grabbed;
     IVector2 grabbedPart;
     IVector2 lastValidPosition;
-    
+
+    bool outsideOfGrid = true;
+
+
+    SpriteRenderer _spriteRenderer;
+    Material _material;
+
+
+    private void Start()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _material = _spriteRenderer.material;
+    }
+
     public void Place(IVector2 pos)
     {
         _BBox = new BBox(pos, size);
@@ -146,9 +175,14 @@ public class Block : MonoBehaviour
 
     public void Grab()
     {
+        if (!outsideOfGrid)
+            Game.I.HouseGrid.RemoveBlockAt(BBox.From);
+
         grabbed = true;
         grabbedPart = Game.MouseWorldPos.ToIVec() - _BBox.From;
         lastValidPosition = BBox.From;
+        _material.SetInt("_Ghost", 1);
+        _spriteRenderer.sortingOrder = 100;
     }
 
     private void Update()
@@ -157,11 +191,19 @@ public class Block : MonoBehaviour
         {
             IVector2 int_pos = Game.MouseWorldPos.ToIVec() - grabbedPart;
             transform.position = int_pos.ToVec();
-            if (Game.I.HouseGrid.BlockFits(this, int_pos)) lastValidPosition = int_pos;
+
+            bool valid_placement = Game.I.HouseGrid.BlockFits(this, int_pos);
+            _material.SetInt("_PlacementValid", valid_placement ? 1 : 0);
+
+            if (valid_placement) lastValidPosition = int_pos;
             if (Input.GetMouseButtonUp(0))
             {
+                transform.position = lastValidPosition.ToVec();
                 Game.I.HouseGrid.AddBlock(this, lastValidPosition);
+                outsideOfGrid = false;
                 grabbed = false;
+                _material.SetInt("_Ghost", 0);
+                _spriteRenderer.sortingOrder = 0;
             }
         }
     }
