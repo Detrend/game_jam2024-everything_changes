@@ -1,143 +1,17 @@
-using System;
-using System.Collections;
+using JetBrains.Annotations;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
 
-[Serializable]
-public struct IVector2
+
+
+
+public struct BoxSearchData
 {
-    public int X, Y;
-    public IVector2(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-
-    public static IVector2 Zero => new (0, 0);
-
-    public static IVector2 operator +(IVector2 a, IVector2 b) => new(a.X + b.X, a.Y + b.Y);
-
-    public static IVector2 operator -(IVector2 a, IVector2 b) => new(a.X - b.X, a.Y - b.Y);
-
-    public static bool operator >(IVector2 a, IVector2 b) => a.X > b.X && a.Y > b.Y;
-    public static bool operator <(IVector2 a, IVector2 b) => a.X < b.X && a.Y < b.Y;
-    public static bool operator>=(IVector2 a, IVector2 b) => a.X >= b.X && a.Y >= b.Y;
-    public static bool operator<=(IVector2 a, IVector2 b) => a.X <= b.X && a.Y <= b.Y;
-
-    public static IVector2 Min(IVector2 a, IVector2 b) => new(Mathf.Min(a.X, b.X), Mathf.Min(a.Y, b.Y));
-    public static IVector2 Max(IVector2 a, IVector2 b) => new(Mathf.Max(a.X, b.X), Mathf.Max(a.Y, b.Y));
-
-
-    public IEnumerable<IVector2> AllCoordinates
-    {
-        get
-        {
-            for (int i = 0; i < X; i++)
-            {
-                for (int j = 0; j < Y; j++)
-                {
-                    yield return new IVector2 (i, j);
-                }
-            }
-        }
-    }
-
-
-    public static bool operator ==(IVector2 left, IVector2 right)
-    {
-        return left.X == right.X &&
-               left.Y == right.Y;
-    }
-    public static bool operator !=(IVector2 left, IVector2 right) => !(left == right);
-
-    public override bool Equals(object obj)
-    {
-        if (obj is IVector2 other)
-        {
-            return this == other; // Use the == operator
-        }
-        return false;
-    }
-
-    public readonly override int GetHashCode() => HashCode.Combine(X, Y);
-
-    public readonly Vector2 ToVec() => new(X, Y);
-
-
-    public override string ToString()
-    {
-        return "(" + X.ToString() + ", " + Y.ToString() + ")";
-    }
+    public bool visited;
 }
 
-
-
-[Serializable]
-public readonly struct BBox
-{
-    private readonly IVector2 _from;
-    private readonly IVector2 _to;
-
-    public readonly IVector2 From => _from;
-    public readonly IVector2 To => _to;
-
-    public readonly IVector2 Size => To - From;
-
-    public BBox(IVector2 pos, IVector2 size)
-    {
-        _from = pos;
-        _to = _from + size;
-    }
-
-    public readonly BBox Extend(BBox b)
-    {
-        return new BBox(
-            IVector2.Min(From, b.From),
-            IVector2.Max(To, b.To)
-        );
-    }
-
-    public bool Contains(BBox b) => From <= b.From && To >= b.To;
-
-    public bool Contains(IVector2 a) => a.X >= From.X && a.X < To.X && a.Y >= From.Y && a.Y < To.Y;
-
-    public static bool operator ==(BBox left, BBox right)
-    {
-        return left.From == right.From &&
-               left.To == right.To;
-    }
-    public static bool operator !=(BBox left, BBox right) => !(left == right);
-
-    public override bool Equals(object obj)
-    {
-        if (obj is BBox other)
-        {
-            return this == other; // Use the == operator
-        }
-        return false;
-    }
-
-    public override int GetHashCode() => HashCode.Combine(From.GetHashCode(), To.GetHashCode());
-
-
-    public IEnumerable<IVector2> AllCoordinates
-    {
-        get
-        {
-            foreach (IVector2 x in Size.AllCoordinates) yield return x + From;
-        }
-    }
-}
-
-
-public static class Vec2Ext
-{
-    public static IVector2 ToIVec(this Vector2 v) => new(Mathf.FloorToInt(v.x), Mathf.FloorToInt(v.y));
-}
 
 
 
@@ -149,59 +23,141 @@ public class Block : MonoBehaviour
 
     public IVector2 size;
 
+    public bool canBeMoved = true;
 
-    bool grabbed;
-    IVector2 grabbedPart;
-    IVector2 lastValidPosition;
+    private bool _grabbed;
+    private IVector2 _grabbedPart;
+    private IVector2 _lastValidPosition;
 
-    bool outsideOfGrid = true;
+    private BlockGrid _parentGrid = null;
 
 
     SpriteRenderer _spriteRenderer;
     Material _material;
 
 
+    List<Block> _blocksAbove;
+    List<Block> _blocksBelow;
+
+    public List<Block> BlocksAbove => _blocksAbove;
+    public List<Block> BlocksBelow => _blocksBelow;
+
+
+    public BoxSearchData boxSearchData;
+
+
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _material = _spriteRenderer.material;
+        _material.SetFloat("_BlockWidth", size.X);
+        _blocksAbove = new();
+        _blocksBelow = new();
+
+        _BBox = new(((Vector2)transform.position).ToIVec(), size);
+        transform.position = _BBox.from.ToVec();
     }
 
-    public void Place(IVector2 pos)
+    public void Place(BlockGrid grid, IVector2 pos, bool search_above_below)
     {
         _BBox = new BBox(pos, size);
+        grid.AddBlockAt(this, pos);
+        _parentGrid = grid;
+        _material.SetInt("_InHouseGrid", 1);
+        
+        if (search_above_below)
+        {
+            for (int x = BBox.from.X; x < BBox.to.X; x++)
+            {
+                BlockRecord block_below = grid[new IVector2(x, BBox.from.Y - 1)];
+                if (block_below != null && !_blocksBelow.Contains(block_below.block)) LinkWithBelow(block_below.block);
+
+                BlockRecord block_above = grid[new IVector2(x, BBox.to.Y)];
+                if (block_above != null && !_blocksAbove.Contains(block_above.block)) LinkWithAbove(block_above.block);
+            }
+        }
+        Game.I.HouseGrid.CreateFallingGridFromUnstable();
     }
+
+    public void RemoveFromGrid()
+    {
+        _parentGrid.RemoveBlockAt(BBox.from);
+        _parentGrid = null;
+    }
+
+    public void LinkWithBelow(Block b) {
+        _blocksBelow.Add(b);
+        b._blocksAbove.Add(this);
+    }
+    public void LinkWithAbove(Block b) {
+        _blocksAbove.Add(b);
+        b._blocksBelow.Add(this);
+    }
+
+    public void RemoveLinkWithBelow(Block b)
+    {
+        _blocksBelow.Remove(b);
+        b._blocksAbove.Remove(this);
+    }
+    public void RemoveLinkWithAbove(Block b)
+    {
+        _blocksAbove.Remove(b);
+        b._blocksBelow.Remove(this);
+    }
+
+
 
 
     public void Grab()
     {
-        if (!outsideOfGrid)
-            Game.I.HouseGrid.RemoveBlockAt(BBox.From);
+        if (!canBeMoved) return;
 
-        grabbed = true;
-        grabbedPart = Game.MouseWorldPos.ToIVec() - _BBox.From;
-        lastValidPosition = BBox.From;
+        _material.SetInt("_InHouseGrid", 0);
+        if (_parentGrid != null)
+            _parentGrid.RemoveBlockAt(BBox.from);
+
+
+        foreach (Block block_above in _blocksAbove)
+            block_above.BlocksBelow.Remove(this);
+        _blocksAbove.Clear();
+
+        foreach (Block block_below in _blocksBelow)
+            block_below.BlocksAbove.Remove(this);
+        _blocksBelow.Clear();
+
+        Game.I.HouseGrid.CreateFallingGridFromUnstable();
+
+        _grabbed = true;
+        _grabbedPart = Game.MouseWorldPos.ToIVec() - transform.position.ToIVec();
+        _lastValidPosition = BBox.from;
         _material.SetInt("_Ghost", 1);
         _spriteRenderer.sortingOrder = 100;
     }
 
     private void Update()
     {
-        if (grabbed)
+        foreach (Block above in BlocksAbove)
         {
-            IVector2 int_pos = Game.MouseWorldPos.ToIVec() - grabbedPart;
+            Vector2 a = above.BBox.Center, b = BBox.Center;
+            Debug.DrawLine(Vector2.Lerp(a, b, 0.25f), Vector2.Lerp(a, b, 0.75f));
+        }
+
+
+        if (_grabbed)
+        {
+            IVector2 int_pos = Game.MouseWorldPos.ToIVec() - _grabbedPart;
             transform.position = int_pos.ToVec();
 
-            bool valid_placement = Game.I.HouseGrid.BlockFits(this, int_pos);
+            bool valid_placement = Game.CanPlaceBlockAt(this, int_pos);
             _material.SetInt("_PlacementValid", valid_placement ? 1 : 0);
 
-            if (valid_placement) lastValidPosition = int_pos;
+            if (valid_placement) _lastValidPosition = int_pos;
             if (Input.GetMouseButtonUp(0))
             {
-                transform.position = lastValidPosition.ToVec();
-                Game.I.HouseGrid.AddBlock(this, lastValidPosition);
-                outsideOfGrid = false;
-                grabbed = false;
+                transform.position = _lastValidPosition.ToVec();
+                Place(Game.I.HouseGrid, _lastValidPosition, true);
+                
+                _grabbed = false;
                 _material.SetInt("_Ghost", 0);
                 _spriteRenderer.sortingOrder = 0;
             }

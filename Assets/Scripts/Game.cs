@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Web;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -13,16 +10,21 @@ public class Game : MonoBehaviour
     [NonSerialized] public DisasterManager DisasterManager;
     [NonSerialized] public DisasterSpawner DisasterSpawner;
 
+    public List<FallingGrid> FallingGrids;
+
+    public GameObject fallingGridPrefab;
+
 
     private void Awake()
     {
-        if (I != null && I != this) Destroy(this);
+        if (I != null && I != this)
+        {
+            Destroy(this);
+            return;
+        }
         else I = this;
-    }
 
-    private void Start()
-    {
-        HouseGrid       = GetComponentInChildren<HouseGrid>();
+        HouseGrid = GetComponentInChildren<HouseGrid>();
         DisasterManager = GetComponentInChildren<DisasterManager>();
         DisasterSpawner = GetComponentInChildren<DisasterSpawner>();
     }
@@ -44,10 +46,21 @@ public class Game : MonoBehaviour
         }
     }
 
-  private void OnDestroy()
-  {
-    I = null;
-  }
+    private void OnDestroy()
+    {
+        I = null;
+    }
+    
+    public static bool CanPlaceBlockAt(Block block, IVector2 pos)
+    {
+        if (!I.HouseGrid.CanPlaceBlockAt(block, pos)) return false;
+        foreach (FallingGrid g in I.FallingGrids)
+        {
+            if (!g.CanPlaceBlockAt(block, pos)) return false;
+        }
+        return true;
+    }
+
 
 
   public static Vector2 MouseWorldPos => Camera.main.ScreenToWorldPoint(Input.mousePosition);
