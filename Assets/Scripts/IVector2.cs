@@ -88,4 +88,5 @@ public static class Vec2Ext
 
     public static IVector2 ToIVec(this Vector3 v) => ((Vector2) v).ToIVec();
 
+    public static Vector2 ToVec2(this Vector3 v) => new(v.x, v.y);
 }

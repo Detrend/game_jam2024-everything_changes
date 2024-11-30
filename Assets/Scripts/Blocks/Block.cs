@@ -56,14 +56,61 @@ public class Block : MonoBehaviour
     Flooding _flooding;
 
 
+    float m_HP = 100.0f;
 
-    private void Start()
+    public virtual void DealDamage(float dmg)
     {
+      m_HP -= dmg;
+      m_HP = Mathf.Max(m_HP, 0.0f);
+    }
+
+    public virtual float GetHP()
+    {
+        return m_HP;
+    }
+
+    public virtual float GetMaxHP()
+    {
+        return 100.0f;
+    }
+
+    public virtual void DealWaterDamage(float amount)
+    {
+      
+    }
+
+    public virtual bool IsSolid()
+    {
+        return false;
+    }
+
+  public virtual float GetWaterAmount()
+    {
+        return 0.0f;
+    }
+
+    public virtual float GetMaxWaterAmount()
+    {
+        return 0.0f;
+    }
+
+    private void OnDrawGizmos()
+    {
+      float max = GetMaxHP();
+      float hp  = GetHP();
+      float ratio = max > 0.0f ? hp / max : 1.0f;
+      Gizmos.color = Color.green;
+      Gizmos.DrawCube(transform.position, new Vector3(ratio, 0.25f, 0.0f));
+    }
+
+  private void Awake()
+    {
+        _blocksAbove = new();
+        _blocksBelow = new();
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _material = _spriteRenderer.material;
         _material.SetFloat("_BlockWidth", size.X);
-        _blocksAbove = new();
-        _blocksBelow = new();
 
         _BBox = new(((Vector2)transform.position).ToIVec(), size);
         transform.position = _BBox.from.ToVec();

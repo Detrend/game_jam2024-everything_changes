@@ -53,4 +53,4 @@ MonoBehaviour:
   _healthToBitsRatio: 4
   _maxAnimationTime: 5
   _oneHPLossTime: 0.5
-  _SpacingY: -0.7
+  _SpacingY: -0.48
