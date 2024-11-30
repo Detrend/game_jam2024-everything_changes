@@ -695,69 +695,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 789130283941709693, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 789130283941709693, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 789130283941709693, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3166197590689128461, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3166197590689128461, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3166197590689128461, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3239083367718243594, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: m_Name
       value: Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: gameRegion.to.X
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: gameRegion.to.Y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: fallingGridPrefab
-      value: 
-      objectReference: {fileID: 8140370919147371446, guid: 6d213e04d4ba0fe458a828ca172d1e15, type: 3}
-    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: gameRegion.from.X
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: gameRegion.from.Y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8104887743267123817, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: BBox.to.X
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8104887743267123817, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: BBox.to.Y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8104887743267123817, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: BBox.from.X
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8104887743267123817, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: BBox.from.Y
-      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
