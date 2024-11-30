@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web;
@@ -8,9 +9,9 @@ public class Game : MonoBehaviour
 {
     public static Game I { get; private set; }
 
-    public HouseGrid       HouseGrid;
-    public DisasterManager DisasterManager;
-    public DisasterSpawner DisasterSpawner;
+    [NonSerialized] public HouseGrid       HouseGrid;
+    [NonSerialized] public DisasterManager DisasterManager;
+    [NonSerialized] public DisasterSpawner DisasterSpawner;
 
 
     private void Awake()
