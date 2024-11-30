@@ -8,9 +8,11 @@ using UnityEngine.Events;
 public enum DisasterType
 {
   Zombies,
-  Storm,
   Trump,
+  Rain,
   Tornado,
+  Earthquake,
+  Floods,
   Ufo,
 }
 

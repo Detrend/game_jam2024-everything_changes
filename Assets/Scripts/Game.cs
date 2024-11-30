@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     [NonSerialized] public HouseGrid       HouseGrid;
     [NonSerialized] public DisasterManager DisasterManager;
     [NonSerialized] public DisasterSpawner DisasterSpawner;
+    [NonSerialized] public ScreenShaker    ScreenShaker;
 
     public List<FallingGrid> FallingGrids;
 
@@ -27,6 +28,7 @@ public class Game : MonoBehaviour
         HouseGrid = GetComponentInChildren<HouseGrid>();
         DisasterManager = GetComponentInChildren<DisasterManager>();
         DisasterSpawner = GetComponentInChildren<DisasterSpawner>();
+        ScreenShaker    = GetComponentInChildren<ScreenShaker>();
     }
 
 

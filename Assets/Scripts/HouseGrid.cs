@@ -5,6 +5,7 @@ using UnityEngine;
 
 
 
+
 public class BlockRecord
 {
     readonly public Block block;
@@ -29,11 +30,11 @@ public static class Search
     }
 
 
-    public static void RunAboveBFS(Block from)
-    {
-        Queue<Block> queue = new();
-        queue.Enqueue(from);
-        from.boxSearchData.visited = true;
+  public static void RunAboveBFS(Block from)
+  {
+    Queue<Block> queue = new();
+    queue.Enqueue(from);
+    from.boxSearchData.visited = true;
 
         while (queue.Count > 0)
         {
@@ -82,6 +83,17 @@ public class HouseGrid : BlockGrid
             }
         }
         return true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+      //var bb = new BBox(new(-10, -10), new(20, 40));
+      //var from = transform.position + new Vector3(bb.from.X, bb.from.Y, 0.0f);
+      //var to = transform.position + new Vector3(bb.to.X, bb.to.Y, 0.0f);
+      //Gizmos.DrawLine(from, new Vector3(to.x, from.y, to.z));
+      //Gizmos.DrawLine(new Vector3(to.x, from.y, to.z), to);
+      //Gizmos.DrawLine(new Vector3(from.x, to.y, to.z), to);
+      //Gizmos.DrawLine(from, new Vector3(from.x, to.y, to.z));
     }
 
     public void CreateFallingGridFromUnstable(){
