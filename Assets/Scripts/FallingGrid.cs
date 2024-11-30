@@ -33,7 +33,7 @@ public class FallingGrid : BlockGrid
             int current_move = Mathf.FloorToInt(new_fall_offset);
 
             bool stopped = false;
-            foreach (IVector2 pos in BBox.AllCoordinates)
+            foreach (IVector2 pos in Game.I.gameRegion.AllCoordinates)
             {
                 BlockRecord top_block = this[pos];
                 if (top_block == null) continue;
@@ -93,7 +93,7 @@ public class FallingGrid : BlockGrid
             for (int j = Mathf.FloorToInt(fallOffset); j < block.size.Y + Mathf.CeilToInt(fallOffset); j++)
             {
                 IVector2 check = new IVector2(i, j) + pos;
-                if (BBox.Contains(check) && this[check] != null) return false;
+                if (Game.InBounds(check) && this[check] != null) return false;
             }
         }
         return true;
