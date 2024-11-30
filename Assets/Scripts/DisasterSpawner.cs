@@ -13,7 +13,19 @@ public class DisasterSpawner : MonoBehaviour
   GameObject TrumpObject;
 
   [SerializeField]
-  GameObject StormObject;
+  GameObject RainObject;
+
+  [SerializeField]
+  GameObject UfoObject;
+
+  [SerializeField]
+  GameObject EarthquakeObject;
+
+  [SerializeField]
+  GameObject TornadoObject;
+
+  [SerializeField]
+  GameObject FloodObject;
 
   [SerializeField]
   int SeedOverride = -1;
@@ -31,15 +43,39 @@ public class DisasterSpawner : MonoBehaviour
         break;
       }
 
-      case DisasterType.Storm:
-      {
-        StartStorm();
-        break;
-      }
-
       case DisasterType.Trump:
       {
         StartCoroutine(SpawnZombieWaves(2, 5));
+        break;
+      }
+
+      case DisasterType.Rain:
+      {
+        StartRain();
+        break;
+      }
+
+      case DisasterType.Tornado:
+      {
+        StartTornado();
+        break;
+      }
+
+      case DisasterType.Earthquake:
+      {
+        StartEarthquake();
+        break;
+      }
+
+      case DisasterType.Floods:
+      {
+        StartFloods();
+        break;
+      }
+
+      case DisasterType.Ufo:
+      {
+        StartUfo();
         break;
       }
     }
@@ -66,14 +102,34 @@ public class DisasterSpawner : MonoBehaviour
     yield return null;
   }
 
-  void StartStorm()
+  void StartRain()
   {
-    Instantiate(StormObject, transform);
+    Instantiate(RainObject, transform);
+  }
+
+  void StartTornado()
+  {
+    Instantiate(TornadoObject, transform);
+  }
+
+  void StartFloods()
+  {
+    Instantiate(FloodObject, transform);
+  }
+
+  void StartEarthquake()
+  {
+    Instantiate(EarthquakeObject, transform);
   }
 
   void SpawnZombie()
   {
     Instantiate(ZombieObject, transform);
+  }
+
+  void StartUfo()
+  {
+    Instantiate(UfoObject, transform);
   }
 
   void Awake()
