@@ -44,12 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab689ac0ab211ee48ab35bd3e99a7721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BBox:
-    from:
-      X: -3
-      Y: -2
-    to:
-      X: 3
-      Y: 4
   fallingBlocks: []
-  fallAcceleration: 1
+  fallAcceleration: 10

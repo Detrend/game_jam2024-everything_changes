@@ -10,7 +10,10 @@ public class BlockGrid : MonoBehaviour
 
     BlockRecord[,] data;
 
-    //public BBox BBox;
+    //total amount of filled blocks, 1x1 units
+    int _filledBlockAmount = 0;
+    public int FilledBlockAmount => _filledBlockAmount;
+
 
     public BlockRecord this[IVector2 pos]
     {
@@ -38,6 +41,7 @@ public class BlockGrid : MonoBehaviour
 
     public void AddBlockAt(Block block, IVector2 pos)
     {
+        _filledBlockAmount += block.BBox.Area;
         _allBlocks.Add(block);
         // TODO? Maybe allow resizing the grid beforehand? Might be more memory efficient and faster during init
         //if (!_BBox.Contains(block.BBox))
@@ -57,10 +61,16 @@ public class BlockGrid : MonoBehaviour
     public void RemoveBlockAt(IVector2 pos)
     {
         Block b = this[pos].block;
+        _filledBlockAmount -= b.BBox.Area;
         _allBlocks.Remove(b);
         foreach (IVector2 c in b.BBox.AllCoordinates)
         {
             this[c] = null;
         }
+        if (_allBlocks.Count == 0)
+        {
+            Destroy(this);
+        }
+
     }
 }
