@@ -103,11 +103,19 @@ public class FallingGrid : BlockGrid
                     }
                 }
 
-                if (another_fg != null)
+                int boxes_transferred = total_boxes_present - FilledBlockAmount;
+                float impact_energy;
+                if (another_fg == null)
                 {
-                    int boxes_transferred = total_boxes_present - FilledBlockAmount;
-                    another_fg.fallSpeed = Mathf.Lerp(another_fg.fallSpeed, fallSpeed, 1f * boxes_transferred / another_fg.FilledBlockAmount);
+                    impact_energy = fallSpeed * boxes_transferred;
                 }
+                else
+                {
+                    float new_fall_speed = (another_fg == null) ? 0f : Mathf.Lerp(another_fg.fallSpeed, fallSpeed, 1f * boxes_transferred / another_fg.FilledBlockAmount);
+                    impact_energy = (new_fall_speed - another_fg.fallSpeed) * (another_fg.FilledBlockAmount - boxes_transferred) + (fallSpeed - new_fall_speed) * boxes_transferred;
+                    another_fg.fallSpeed = new_fall_speed;
+                }
+                Game.I.objectFallScreenShake._amount += 0.02f * impact_energy;
             }
         }
     }

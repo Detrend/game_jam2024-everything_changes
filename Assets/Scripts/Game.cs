@@ -15,6 +15,10 @@ public class Game : MonoBehaviour
 
     public GameObject fallingGridPrefab;
 
+    [NonSerialized]
+    public ScreenShake objectFallScreenShake;
+
+
 
     public BBox gameRegion;
 
@@ -32,6 +36,17 @@ public class Game : MonoBehaviour
         DisasterManager = GetComponentInChildren<DisasterManager>();
         DisasterSpawner = GetComponentInChildren<DisasterSpawner>();
         ScreenShaker    = GetComponentInChildren<ScreenShaker>();
+    }
+
+    private void Start()
+    {
+        objectFallScreenShake = new(0.3f);
+        objectFallScreenShake._shakeVectors = new()
+        {
+            (new (0.1f, 0.9f), 14f),
+            (new (0.7f, 0.1f), 45f),
+        };
+        ScreenShaker.AddShake(objectFallScreenShake);
     }
 
 
