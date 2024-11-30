@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d0ea670ae32304a4ea2aa3706fcdbc10, type: 3}
+    - target: {fileID: 1916543352150086089, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bf14d0c8f9c543d48bddbe089df761d8, type: 2}
     - target: {fileID: 2021010636748731552, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Size.x
       value: 2
@@ -27,6 +31,14 @@ PrefabInstance:
     - target: {fileID: 2104622230402112152, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Name
       value: ToiletPaperBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406369952687994830, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2406369952687994830, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -68,6 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6081351460517011371, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc79960014c637c4c8ba60fea1313ddc, type: 3}
     - target: {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: size.X
       value: 2

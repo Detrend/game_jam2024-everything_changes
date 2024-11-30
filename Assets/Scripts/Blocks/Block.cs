@@ -13,6 +13,11 @@ public struct BoxSearchData
 }
 
 
+public enum BlockType
+{
+    ROOF, SENTRY, TOILET_PAPER
+}
+
 
 
 public class Block : MonoBehaviour
@@ -44,6 +49,13 @@ public class Block : MonoBehaviour
 
     public BoxSearchData boxSearchData;
 
+    public BlockType blockType;
+
+
+
+    Flooding _flooding;
+
+
 
     private void Start()
     {
@@ -55,6 +67,8 @@ public class Block : MonoBehaviour
 
         _BBox = new(((Vector2)transform.position).ToIVec(), size);
         transform.position = _BBox.from.ToVec();
+
+        _flooding = GetComponentInChildren<Flooding>();
     }
 
     public void Place(BlockGrid grid, IVector2 pos, bool search_above_below)

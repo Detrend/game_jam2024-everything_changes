@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
     [NonSerialized] public DisasterSpawner DisasterSpawner;
     [NonSerialized] public ScreenShaker    ScreenShaker;
 
+    [NonSerialized]
     public List<FallingGrid> FallingGrids;
 
     public GameObject fallingGridPrefab;
@@ -18,9 +19,9 @@ public class Game : MonoBehaviour
     [NonSerialized]
     public ScreenShake objectFallScreenShake;
 
-    [NonSerialized]
+    
     public ParticleSystem objectFallSparks;
-
+    public ParticleSystem floodParticles;
 
 
     public BBox gameRegion;
@@ -40,6 +41,8 @@ public class Game : MonoBehaviour
         DisasterSpawner = GetComponentInChildren<DisasterSpawner>();
         ScreenShaker    = GetComponentInChildren<ScreenShaker>();
         objectFallSparks = GetComponentInChildren<ParticleSystem>();
+
+        FallingGrids = new();
     }
 
     private void Start()
