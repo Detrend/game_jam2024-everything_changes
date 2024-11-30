@@ -150,19 +150,8 @@ public class DisasterSpawner : MonoBehaviour
     
   }
 
-  void DoDebug()
-  {
-    if (Input.GetKeyDown(KeyCode.F2))
-    {
-      StartUfo();
-    }
-  }
-
   void Update()
   {
-    if (Debug.isDebugBuild)
-    {
-      DoDebug();
-    }
+    
   }
 }

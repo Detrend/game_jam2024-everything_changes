@@ -161,6 +161,14 @@ public class DisasterManager : MonoBehaviour
     {
       m_Debug = !m_Debug;
     }
+
+    for (var startCode = KeyCode.F2; startCode <= KeyCode.F8; ++startCode)
+    {
+      if (Input.GetKeyDown(startCode))
+      {
+        OnDisasterStartedInternal(DisasterType.Zombies + (startCode - KeyCode.F2));
+      }
+    }
   }
 
   void OnGUI()

@@ -103,11 +103,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ZombieObject: {fileID: 1192823452735660830, guid: b3a650fa13c708f419f321028eeabc4b, type: 3}
   TrumpObject: {fileID: 1192823452735660830, guid: b3a650fa13c708f419f321028eeabc4b, type: 3}
-  RainObject: {fileID: 0}
-  UfoObject: {fileID: 0}
+  RainObject: {fileID: 5352057332126261098, guid: 8fcf2a2b6cd40b84ea76ce7813f694f7, type: 3}
+  UfoObject: {fileID: 6620254677531250345, guid: 9e2bb025b915d4f43bccc53e3e26d749, type: 3}
   EarthquakeObject: {fileID: 71828018825946112, guid: 1daf62e3fa4eb5241a68425908f86295, type: 3}
   TornadoObject: {fileID: 7755689707972353326, guid: 27ccb6a82fd08a04ba06682e68a752bc, type: 3}
-  FloodObject: {fileID: 0}
+  FloodObject: {fileID: 6037817056780040980, guid: d811b14d9d8d7254fb3522e6888612ca, type: 3}
   SeedOverride: 5
 --- !u!1 &6159300138589122039
 GameObject:
@@ -185,17 +185,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   Probabilities:
-  - disaster: 0
-    probability: 0
-    cooldown: 0
-    enabledSince: 0
-    disabledSince: 0
-  - disaster: 2
-    probability: 0
-    cooldown: 0
-    enabledSince: 0
-    disabledSince: 0
-  - disaster: 3
+  - disaster: 6
     probability: 0.1
     cooldown: 0
     enabledSince: 0
