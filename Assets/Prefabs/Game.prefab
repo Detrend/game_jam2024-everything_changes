@@ -105,7 +105,7 @@ MonoBehaviour:
   TrumpObject: {fileID: 1192823452735660830, guid: b3a650fa13c708f419f321028eeabc4b, type: 3}
   RainObject: {fileID: 0}
   UfoObject: {fileID: 0}
-  EarthquakeObject: {fileID: 0}
+  EarthquakeObject: {fileID: 71828018825946112, guid: 1daf62e3fa4eb5241a68425908f86295, type: 3}
   TornadoObject: {fileID: 7755689707972353326, guid: 27ccb6a82fd08a04ba06682e68a752bc, type: 3}
   FloodObject: {fileID: 0}
   SeedOverride: 5
