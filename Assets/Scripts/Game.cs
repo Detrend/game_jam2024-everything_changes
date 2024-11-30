@@ -8,7 +8,9 @@ public class Game : MonoBehaviour
 {
     public static Game I { get; private set; }
 
-    public HouseGrid HouseGrid;
+    public HouseGrid       HouseGrid;
+    public DisasterManager DisasterManager;
+    public DisasterSpawner DisasterSpawner;
 
 
     private void Awake()
@@ -19,7 +21,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        HouseGrid = GetComponentInChildren<HouseGrid>();
+        HouseGrid       = GetComponentInChildren<HouseGrid>();
+        DisasterManager = GetComponentInChildren<DisasterManager>();
+        DisasterSpawner = GetComponentInChildren<DisasterSpawner>();
     }
 
 
@@ -39,7 +43,12 @@ public class Game : MonoBehaviour
         }
     }
 
+  private void OnDestroy()
+  {
+    I = null;
+  }
 
-    public static Vector2 MouseWorldPos => Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+  public static Vector2 MouseWorldPos => Camera.main.ScreenToWorldPoint(Input.mousePosition);
     public static IVector2 MouseTilePos => MouseWorldPos.ToIVec();
 }

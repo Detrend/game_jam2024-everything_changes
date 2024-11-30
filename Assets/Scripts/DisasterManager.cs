@@ -9,8 +9,6 @@ public enum DisasterType
 {
   Zombies,
   Storm,
-
-  // TODO
   Trump,
   Tornado,
   Ufo,
@@ -43,6 +41,7 @@ public class DisasterSettings
 
 public class DisasterManager : MonoBehaviour
 {
+  // ===          SERIALIZABLE          === //
   [SerializeField]
   public int RandomSeedOverride = -1;
 
@@ -59,16 +58,29 @@ public class DisasterManager : MonoBehaviour
   [SerializeField]
   public float DisasterSpawnAheadTime = 20.0f;
 
+  // ===              PRIVATE             === //
+
   Dictionary<DisasterType, DisasterSettings> m_Settings = new Dictionary<DisasterType, DisasterSettings>();
 
-  void Start()
+  bool          m_Debug = false;
+  System.Random m_Randomizer;
+
+  void Awake()
   {
     if (RandomSeedOverride >= 0)
     {
       Debug.LogWarning(
         $"<color=yellow>[Disaster Manager] Warning:</color> Random seed is overriden!!!");
-      UnityEngine.Random.InitState(RandomSeedOverride);
+      m_Randomizer = new System.Random(RandomSeedOverride);
     }
+    else
+    {
+      m_Randomizer = new System.Random();
+    }
+  }
+
+  void Start()
+  {
 
     // initialize disaster map
     foreach (var cfg in Probabilities)
@@ -95,6 +107,8 @@ public class DisasterManager : MonoBehaviour
 
   void Update()
   {
+    UpdateDebug();
+
     // Update the disaster probability
     m_TimeAccum += Time.deltaTime;
     while (m_TimeAccum > m_FixedUpdateTime)
@@ -134,6 +148,51 @@ public class DisasterManager : MonoBehaviour
     Debug.Log($"[Disaster Manager] Info: disaster of type \"{type}\" started.");
   }
 
+  void UpdateDebug()
+  {
+    if (!Debug.isDebugBuild)
+    {
+      return;
+    }
+
+    if (Input.GetKeyDown(KeyCode.F1))
+    {
+      m_Debug = !m_Debug;
+    }
+  }
+
+  void OnGUI()
+  {
+    if (!m_Debug)
+    {
+      return;
+    }
+
+    float y = 30.0f;
+
+    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), "[TYPE]: [PROB]");
+
+    // draw probabilities
+    foreach (DisasterType type in Enum.GetValues(typeof(DisasterType)))
+    {
+      y += 30;
+      float prob = GetDisasterProbability(type);
+      GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[{type}]: {prob}");
+    }
+
+    y += 30;
+    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), "[TYPE]: [COUNTDOWN]");
+
+    // draw incoming
+    foreach (var incoming in m_DisastersToCome)
+    {
+      y += 30;
+      float  countdown = incoming.remaining;
+      string type      = incoming.disaster.ToString();
+      GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[{type}]: {countdown}");
+    }
+  }
+
   // Update the disasters here
   void DoFixedUpdate()
   {
@@ -149,7 +208,7 @@ public class DisasterManager : MonoBehaviour
     }
 
     // now generate a random number
-    float rnd = UnityEngine.Random.Range(0.0f, 1.0f);
+    float rnd = (float)m_Randomizer.NextDouble();
 
     float startFrom = 0.0f;
     foreach (var prob in disasterProbs)
