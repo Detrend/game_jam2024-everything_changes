@@ -28,6 +28,8 @@ public struct BBox
         );
     }
 
+    public readonly int Area => Size.X * Size.Y;
+
     public readonly bool Contains(BBox b) => from <= b.from && to >= b.to;
 
     public readonly bool Contains(IVector2 a) => a.X >= from.X && a.X < to.X && a.Y >= from.Y && a.Y < to.Y;

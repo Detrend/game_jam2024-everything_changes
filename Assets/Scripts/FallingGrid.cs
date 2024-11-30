@@ -27,32 +27,57 @@ public class FallingGrid : BlockGrid
 
         fallSpeed += fallAcceleration * Time.deltaTime;
         float new_fall_offset = fallOffset + fallSpeed * Time.deltaTime;
-        if (Mathf.FloorToInt(new_fall_offset) != Mathf.FloorToInt(fallOffset))
+
+        CheckHittingAnotherGrid(Game.I.HouseGrid);
+        foreach (FallingGrid g in Game.I.FallingGrids)
+        {
+            CheckHittingAnotherGrid(g);
+        }
+
+        fallOffset = new_fall_offset;
+        transform.position = new Vector3(0, -fallOffset, 0);
+    }
+
+
+    private void CheckHittingAnotherGrid(BlockGrid another)
+    {
+        FallingGrid another_fg = another as FallingGrid;
+        float another_offset = (another_fg == null) ? 0f : another_fg.fallOffset;
+        float another_speed = (another_fg == null) ? 0f : another_fg.fallSpeed;
+
+
+        float current_offset = fallOffset - another_offset;
+        float next_offset = current_offset + (fallSpeed - another_speed) * Time.deltaTime;
+
+        if (Mathf.FloorToInt(current_offset) != Mathf.FloorToInt(next_offset))
         {
             //Check if any blocks have become stable...
-            int current_move = Mathf.FloorToInt(new_fall_offset);
+            int current_move = Mathf.FloorToInt(next_offset);
 
-            bool stopped = false;
+            bool grids_overlap = false;
             foreach (IVector2 pos in Game.I.gameRegion.AllCoordinates)
             {
                 BlockRecord top_block = this[pos];
                 if (top_block == null) continue;
 
                 IVector2 real_pos = pos - new IVector2(0, current_move);
-                BlockRecord bot_block = Game.I.HouseGrid[real_pos - new IVector2(0, 1)];
+                BlockRecord bot_block = another[real_pos - new IVector2(0, 1)];
 
                 if (top_block != null && bot_block != null)
                 {
                     top_block.block.LinkWithBelow(bot_block.block);
-                    stopped = true;
+                    grids_overlap = true;
                 }
             }
-            if (stopped)
+            if (grids_overlap)
             {
-                Search.ResetSearchFlags(Game.I.HouseGrid.AllBlocks);
-                Search.RunAboveBFS(Game.I.HouseGrid.FoundationBlock);
+                Search.ResetSearchFlags(another.AllBlocks);
+                Search.ResetSearchFlags(AllBlocks);
+                foreach (Block b in another.AllBlocks)
+                    Search.RunAboveBFS(b);
 
-                bool some_blocks_left = false;
+                int total_boxes_present = FilledBlockAmount;
+
                 // all marked true = stable. All marked false = unstable.
                 for (int i = 0; i < _allBlocks.Count; i++)
                 {
@@ -60,29 +85,31 @@ public class FallingGrid : BlockGrid
                     if (b.boxSearchData.visited)
                     {
                         b.RemoveFromGrid();
-                        b.Place(Game.I.HouseGrid, b.BBox.from - new IVector2(0, current_move), true);
+                        b.Place(another, b.BBox.from - new IVector2(0, current_move), true);
                         i--;
                         // TODO APPLY DAMAGE. BOX STOPPED
                     }
                     else
                     {
-                        some_blocks_left = true;
                         //split ties with all above stopped blocks
-                        foreach (Block b_above in b.BlocksAbove)
+                        for (int j = 0; j < b.BlocksAbove.Count; j++)
                         {
-                            if (b_above.boxSearchData.visited) b.RemoveLinkWithAbove(b_above);
+                            if (b.BlocksAbove[j].boxSearchData.visited)
+                            {
+                                b.RemoveLinkWithAbove(b.BlocksAbove[j]);
+                                j--;
+                            }
                         }
                     }
                 }
-                if (!some_blocks_left)
+
+                if (another_fg != null)
                 {
-                    Game.I.FallingGrids.Remove(this);
-                    Destroy(this);
+                    int boxes_transferred = total_boxes_present - FilledBlockAmount;
+                    another_fg.fallSpeed = Mathf.Lerp(another_fg.fallSpeed, fallSpeed, 1f * boxes_transferred / another_fg.FilledBlockAmount);
                 }
             }
         }
-        fallOffset = new_fall_offset;
-        transform.position = new Vector3(0, -fallOffset, 0);
     }
 
 
@@ -97,5 +124,10 @@ public class FallingGrid : BlockGrid
             }
         }
         return true;
+    }
+
+    private void OnDestroy()
+    {
+        Game.I.FallingGrids.Remove(this);
     }
 }
