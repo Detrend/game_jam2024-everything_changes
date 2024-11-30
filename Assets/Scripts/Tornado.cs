@@ -29,8 +29,8 @@ public class Tornado : MonoBehaviour
   void Start()
   {
     m_HP   = MaxHP;
-    m_Xmin = Game.I.HouseGrid.BBox.from.X + Game.I.HouseGrid.transform.position.x;
-    m_Xmax = Game.I.HouseGrid.BBox.to.X   + Game.I.HouseGrid.transform.position.x;
+    m_Xmin = Game.I.gameRegion.from.X + Game.I.HouseGrid.transform.position.x;
+    m_Xmax = Game.I.gameRegion.to.X   + Game.I.HouseGrid.transform.position.x;
   }
 
   void Update()

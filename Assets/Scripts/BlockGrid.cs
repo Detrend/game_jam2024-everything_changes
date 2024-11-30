@@ -10,12 +10,19 @@ public class BlockGrid : MonoBehaviour
 
     BlockRecord[,] data;
 
-    public BBox BBox;
+    //public BBox BBox;
 
     public BlockRecord this[IVector2 pos]
     {
-        get => InBounds(pos) ? data[pos.X - BBox.from.X, pos.Y - BBox.from.Y] : null;
-        set => data[pos.X - BBox.from.X, pos.Y - BBox.from.Y] = value;
+        get {
+            if (!Game.InBounds(pos)) return null;
+            IVector2 i = pos - Game.I.gameRegion.from;
+            return data[i.X, i.Y];
+        }
+        set {
+            IVector2 i = pos - Game.I.gameRegion.from;
+            data[i.X, i.Y] = value;
+        }
     }
 
     void Start() => MyStart();
@@ -24,7 +31,7 @@ public class BlockGrid : MonoBehaviour
     protected virtual void MyStart()
     {
         _allBlocks = new();
-        data = new BlockRecord[BBox.Size.X, BBox.Size.Y];
+        data = new BlockRecord[Game.I.gameRegion.Size.X, Game.I.gameRegion.Size.Y];
     }
 
 
@@ -56,7 +63,4 @@ public class BlockGrid : MonoBehaviour
             this[c] = null;
         }
     }
-
-    public bool InBounds(IVector2 pos) => BBox.Contains(pos);
-
 }
