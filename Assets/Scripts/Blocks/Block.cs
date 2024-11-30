@@ -67,7 +67,12 @@ public class Block : MonoBehaviour
       
     }
 
-    public virtual float GetWaterAmount()
+    public virtual bool IsSolid()
+    {
+        return false;
+    }
+
+  public virtual float GetWaterAmount()
     {
         return 0.0f;
     }
@@ -86,13 +91,14 @@ public class Block : MonoBehaviour
       Gizmos.DrawCube(transform.position, new Vector3(ratio, 0.25f, 0.0f));
     }
 
-  private void Start()
+  private void Awake()
     {
+        _blocksAbove = new();
+        _blocksBelow = new();
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _material = _spriteRenderer.material;
         _material.SetFloat("_BlockWidth", size.X);
-        _blocksAbove = new();
-        _blocksBelow = new();
 
         _BBox = new(((Vector2)transform.position).ToIVec(), size);
         transform.position = _BBox.from.ToVec();

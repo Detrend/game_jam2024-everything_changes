@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a21598ab7a3ba40bb5d575cc71f70f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 10
+  Duration: 5
+  DamagePerSecond: 1
+  DamagePerSecondHeight: 4
+  earthquakeStrength: 1
