@@ -79,7 +79,7 @@ public class HouseGrid : BlockGrid
             for (int j = 0; j < block.size.Y; j++)
             {
                 IVector2 check = new IVector2(i, j) + pos;
-                if (!BBox.Contains(check) || this[check] != null) return false;
+                if (!Game.InBounds(check) || this[check] != null) return false;
             }
         }
         return true;

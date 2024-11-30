@@ -148,7 +148,7 @@ public class Block : MonoBehaviour
 
             bool valid_placement = Game.CanPlaceBlockAt(this, int_pos);
             _material.SetInt("_PlacementValid", 1);// valid_placement ? 1 : 0);
-            IVector2 place_pos = Game.I.ClosestValidPosition(this, cur_pos);
+            IVector2 place_pos = Game.ClosestValidPosition(this, cur_pos);
             transform.position = place_pos.ToVec();
 
             if (Input.GetMouseButtonUp(0))

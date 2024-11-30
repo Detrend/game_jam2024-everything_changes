@@ -16,6 +16,9 @@ public class Game : MonoBehaviour
     public GameObject fallingGridPrefab;
 
 
+    public BBox gameRegion;
+
+
     private void Awake()
     {
         if (I != null && I != this)
@@ -63,14 +66,14 @@ public class Game : MonoBehaviour
         return true;
     }
 
-    public IVector2 ClosestValidPosition(Block b, Vector2 pos)
+    public static IVector2 ClosestValidPosition(Block b, Vector2 pos)
     {
         if (CanPlaceBlockAt(b, pos.ToIVec())) return pos.ToIVec();
 
         float best_dist = 10000;
         IVector2 best_placement = IVector2.Zero;
 
-        foreach (IVector2 p in I.HouseGrid.BBox.AllCoordinates)
+        foreach (IVector2 p in I.gameRegion.AllCoordinates)
         {
             if (CanPlaceBlockAt(b, p))
             {
@@ -98,4 +101,6 @@ public class Game : MonoBehaviour
 
     public static Vector2 MouseWorldPos => Camera.main.ScreenToWorldPoint(Input.mousePosition);
     public static IVector2 MouseTilePos => MouseWorldPos.ToIVec();
+
+    public static bool InBounds(IVector2 pos) => I.gameRegion.Contains(pos);
 }
