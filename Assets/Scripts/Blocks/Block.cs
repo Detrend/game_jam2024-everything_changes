@@ -62,7 +62,10 @@ public class Block : MonoBehaviour
         _BBox = new BBox(pos, size);
         grid.AddBlockAt(this, pos);
         _parentGrid = grid;
-        _material.SetInt("_InHouseGrid", 1);
+
+        transform.position = _BBox.from.ToVec();
+       
+        _material.SetInt("_InHouseGrid", _parentGrid == Game.I.HouseGrid ? 1 : 0);
         
         if (search_above_below)
         {

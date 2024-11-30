@@ -34,11 +34,11 @@ public class DisasterSettings
   public DisasterType disaster;
 
   [Range(0.0f, 0.1f)] public float probability;
+  public float intervalStart = 0.0f;
 
   // cooldown after start
-  public float cooldown;
-  public float enabledSince  = 0.0f;
-  public float disabledSince = 0.0f;
+  public float selfCooldown;
+  public float otherCooldown;
 }
 
 public class DisasterManager : MonoBehaviour
@@ -46,6 +46,9 @@ public class DisasterManager : MonoBehaviour
   // ===          SERIALIZABLE          === //
   [SerializeField]
   public int RandomSeedOverride = -1;
+
+  [SerializeField]
+  public float DebugStartFrom = 0.0f;
 
   [SerializeField]
   public UnityEvent<DisasterType> OnDisasterStarted = new UnityEvent<DisasterType>();
@@ -63,9 +66,12 @@ public class DisasterManager : MonoBehaviour
   // ===              PRIVATE             === //
 
   Dictionary<DisasterType, DisasterSettings> m_Settings = new Dictionary<DisasterType, DisasterSettings>();
+  Dictionary<DisasterType, float> m_Cooldowns           = new Dictionary<DisasterType, float>();
 
   bool          m_Debug = false;
   System.Random m_Randomizer;
+  float         m_TimeSinceLevelStart = 0.0f;
+  float         m_GlobalCooldown = 0.0f;
 
   void Awake()
   {
@@ -83,6 +89,10 @@ public class DisasterManager : MonoBehaviour
 
   void Start()
   {
+    if (Debug.isDebugBuild)
+    {
+      m_TimeSinceLevelStart = DebugStartFrom;
+    }
 
     // initialize disaster map
     foreach (var cfg in Probabilities)
@@ -98,6 +108,8 @@ public class DisasterManager : MonoBehaviour
     // iterate all and fill the uninitialized with default values
     foreach (DisasterType key in Enum.GetValues(typeof(DisasterType)))
     {
+      m_Cooldowns.Add(key, 0.0f);
+
       if (!m_Settings.ContainsKey(key))
       {
         m_Settings.Add(key, new DisasterSettings());
@@ -110,6 +122,17 @@ public class DisasterManager : MonoBehaviour
   void Update()
   {
     UpdateDebug();
+
+    m_TimeSinceLevelStart += Time.deltaTime;
+
+    // Update self cooldowns
+    foreach (DisasterType type in Enum.GetValues(typeof(DisasterType)))
+    {
+      m_Cooldowns[type] = Mathf.Max(0.0f, m_Cooldowns[type] - Time.deltaTime);
+    }
+
+    // Update the global cooldown
+    m_GlobalCooldown = Mathf.Max(0.0f, m_GlobalCooldown - Time.deltaTime);
 
     // Update the disaster probability
     m_TimeAccum += Time.deltaTime;
@@ -135,11 +158,31 @@ public class DisasterManager : MonoBehaviour
 
   float GetDisasterProbability(DisasterType type)
   {
+    if (m_TimeSinceLevelStart < m_Settings[type].intervalStart)
+    {
+      return 0.0f;
+    }
+
+    if (m_GlobalCooldown > 0.0f)
+    {
+      return 0.0f;
+    }
+
+    if (m_Cooldowns[type] > 0.0f)
+    {
+      return 0.0f;
+    }
+
     return m_Settings[type].probability;
   }
 
   void OnDisasterScheduledInternal(DisasterType type)
   {
+    float cooldown = m_Settings[type].otherCooldown;
+    m_GlobalCooldown = Mathf.Max(cooldown, m_GlobalCooldown);
+
+    m_Cooldowns[type] = m_Settings[type].selfCooldown;
+
     OnDisasterScheduled.Invoke(type);
     Debug.Log($"[Disaster Manager] Info: disaster of type \"{type}\" was scheduled.");
   }
@@ -180,18 +223,22 @@ public class DisasterManager : MonoBehaviour
 
     float y = 30.0f;
 
-    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), "[TYPE]: [PROB]");
+    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[Time]: {m_TimeSinceLevelStart}");
+    y += 30;
+    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[Global cooldown]: {m_GlobalCooldown}");
+    y += 30;
+    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), "[TYPE] : [PROB] : [ENABLED SINCE] : [COOLDOWN]");
 
     // draw probabilities
     foreach (DisasterType type in Enum.GetValues(typeof(DisasterType)))
     {
       y += 30;
       float prob = GetDisasterProbability(type);
-      GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[{type}]: {prob}");
+      GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[{type}] : {prob} : {m_Settings[type].intervalStart} : {m_Cooldowns[type]}");
     }
 
     y += 30;
-    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), "[TYPE]: [COUNTDOWN]");
+    GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), "[TYPE] : [COUNTDOWN]");
 
     // draw incoming
     foreach (var incoming in m_DisastersToCome)
@@ -199,7 +246,7 @@ public class DisasterManager : MonoBehaviour
       y += 30;
       float  countdown = incoming.remaining;
       string type      = incoming.disaster.ToString();
-      GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[{type}]: {countdown}");
+      GUI.Label(new Rect(30.0f, y, 300.0f, 30.0f), $"[{type}] : {countdown}");
     }
   }
 

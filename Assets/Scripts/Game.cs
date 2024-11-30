@@ -18,6 +18,9 @@ public class Game : MonoBehaviour
     [NonSerialized]
     public ScreenShake objectFallScreenShake;
 
+    [NonSerialized]
+    public ParticleSystem objectFallSparks;
+
 
 
     public BBox gameRegion;
@@ -36,6 +39,7 @@ public class Game : MonoBehaviour
         DisasterManager = GetComponentInChildren<DisasterManager>();
         DisasterSpawner = GetComponentInChildren<DisasterSpawner>();
         ScreenShaker    = GetComponentInChildren<ScreenShaker>();
+        objectFallSparks = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()

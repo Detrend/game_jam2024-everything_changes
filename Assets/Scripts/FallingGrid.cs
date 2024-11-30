@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class FallingGrid : BlockGrid
@@ -54,6 +55,8 @@ public class FallingGrid : BlockGrid
             //Check if any blocks have become stable...
             int current_move = Mathf.FloorToInt(next_offset);
 
+
+            List<IVector2> border_lines = new();
             bool grids_overlap = false;
             foreach (IVector2 pos in Game.I.gameRegion.AllCoordinates)
             {
@@ -66,9 +69,12 @@ public class FallingGrid : BlockGrid
                 if (top_block != null && bot_block != null)
                 {
                     top_block.block.LinkWithBelow(bot_block.block);
+                    border_lines.Add(pos - new IVector2(0, 1 + Mathf.FloorToInt(fallOffset)));
                     grids_overlap = true;
                 }
             }
+
+            
             if (grids_overlap)
             {
                 Search.ResetSearchFlags(another.AllBlocks);
@@ -105,17 +111,30 @@ public class FallingGrid : BlockGrid
 
                 int boxes_transferred = total_boxes_present - FilledBlockAmount;
                 float impact_energy;
+                float new_fall_speed;
                 if (another_fg == null)
                 {
+                    new_fall_speed = 0f;
                     impact_energy = fallSpeed * boxes_transferred;
                 }
                 else
                 {
-                    float new_fall_speed = (another_fg == null) ? 0f : Mathf.Lerp(another_fg.fallSpeed, fallSpeed, 1f * boxes_transferred / another_fg.FilledBlockAmount);
+                    new_fall_speed = Mathf.Lerp(another_fg.fallSpeed, fallSpeed, 1f * boxes_transferred / another_fg.FilledBlockAmount);
                     impact_energy = (new_fall_speed - another_fg.fallSpeed) * (another_fg.FilledBlockAmount - boxes_transferred) + (fallSpeed - new_fall_speed) * boxes_transferred;
                     another_fg.fallSpeed = new_fall_speed;
                 }
-                Game.I.objectFallScreenShake._amount += 0.02f * impact_energy;
+                Game.I.objectFallScreenShake._amount += 0.01f * impact_energy;
+
+                int total_particle_count = 5 * (int) impact_energy;
+                for (int i = 0; i < total_particle_count; i++)
+                {
+                    ParticleSystem.EmitParams ps = new()
+                    {
+                        position = border_lines[i * border_lines.Count / total_particle_count].ToVec() + new Vector2(Random.Range(0f, 1f), 0),
+                        velocity = new Vector2(Random.Range(-1f, 1f) < 0f ? 1f : -1f, -new_fall_speed)
+                    };
+                    Game.I.objectFallSparks.Emit(ps, 1);
+                }
             }
         }
     }
