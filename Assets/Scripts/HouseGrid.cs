@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -20,79 +20,118 @@ public class BlockRecord
 
 
 
-public class HouseGrid : MonoBehaviour
+
+public static class Search
 {
-    BlockRecord[,] data;
-
-    public BBox _BBox;
-
-
-
-    public BlockRecord this[IVector2 pos]
+    public static void ResetSearchFlags(IEnumerable<Block> blocks)
     {
-        get => data[pos.X - _BBox.From.X, pos.Y - _BBox.From.Y];
-        set => data[pos.X - _BBox.From.X, pos.Y - _BBox.From.Y] = value;
+        foreach (Block b in blocks) b.boxSearchData.visited = false;
     }
 
 
-    void Start()
+    public static void RunAboveBFS(Block from)
     {
-        data = new BlockRecord[20, 40];
-        _BBox = new BBox(new (-10, -10), new(20, 40));
-    }
+        Queue<Block> queue = new();
+        queue.Enqueue(from);
+        from.boxSearchData.visited = true;
 
-    public void AddBlock(Block block, IVector2 pos)
-    {
-        if (!BlockFits(block, pos))
+        while (queue.Count > 0)
         {
-            Debug.Log("Cannot Add block. Doesn't Fit.");
-            return;
-        }
-        block.Place(pos);
-        //if (!_BBox.Contains(block.BBox))
-        //{
-        //    BBox new_bbox = _BBox.Extend(block.BBox);
-        //    BlockRecord[,] new_data = new BlockRecord[new_bbox.Size.X, new_bbox.Size.Y];
-        //    CopyData(data, new_data, _BBox.From - new_bbox.From);
-        //    _BBox = new_bbox;
-        //}
-
-        foreach (IVector2 dif in block.size.AllCoordinates)
-        {
-            this[pos + dif] = new BlockRecord(block, dif);
+            Block b = queue.Dequeue();
+            foreach (Block b2 in b.BlocksAbove)
+            {
+                if (!b2.boxSearchData.visited)
+                {
+                    b2.boxSearchData.visited = true;
+                    queue.Enqueue(b2);
+                }
+            }
         }
     }
 
-    public void RemoveBlockAt(IVector2 pos)
+
+}
+
+
+
+
+
+public class HouseGrid : BlockGrid
+{
+
+    Block _foundationBlock;
+    public Block FoundationBlock => _foundationBlock;
+
+    protected override void MyStart()
     {
-        Block b = this[pos].block;
-        foreach (IVector2 c in b.BBox.AllCoordinates)
-        {
-            this[c] = null;
-        }
+        base.MyStart();
+
+        _foundationBlock = GetComponentInChildren<Block>();
+        _foundationBlock.Place(Game.I.HouseGrid, ((Vector2)_foundationBlock.transform.position).ToIVec(), false);
     }
 
-    public bool BlockFits(Block block, IVector2 pos)
+
+    public bool CanPlaceBlockAt(Block block, IVector2 pos)
     {
         for (int i = 0; i < block.size.X; i++)
         {
             for (int j = 0; j < block.size.Y; j++)
             {
                 IVector2 check = new IVector2(i, j) + pos;
-                if (!_BBox.Contains(check) || this[check] != null) return false;
+                if (!BBox.Contains(check) || this[check] != null) return false;
             }
         }
         return true;
     }
 
-    private static void CopyData(BlockRecord[,] src, BlockRecord[,] dst, IVector2 dst_pos)
-    {
-        for (int i = 0; i < src.GetLength(0); i++)
+    public void CreateFallingGridFromUnstable(){
+        List<Block> all_unstable = Game.I.HouseGrid.AllUnstableBlocks();
+        foreach (Block block in all_unstable)
         {
-            for (int j = 0; j < src.GetLength(1); j++)
+            block.RemoveFromGrid();
+        }
+        if (all_unstable.Count > 0)
+        {
+            FallingGrid g = Instantiate(Game.I.fallingGridPrefab).GetComponent<FallingGrid>();
+            g.fallingBlocks = all_unstable;
+        }
+    }
+
+    //private static void CopyData(BlockRecord[,] src, BlockRecord[,] dst, IVector2 dst_pos)
+    //{
+    //    for (int i = 0; i < src.GetLength(0); i++)
+    //    {
+    //        for (int j = 0; j < src.GetLength(1); j++)
+    //        {
+    //            dst[i + dst_pos.X, j + dst_pos.Y] = dst[i, j];
+    //        }
+    //    }
+    //}
+
+    public List<Block> AllUnstableBlocks()
+    {
+        Search.ResetSearchFlags(_allBlocks);
+        Search.RunAboveBFS(_foundationBlock);
+
+        List<Block> all_unstable_blocks = new();
+        foreach (Block b in _allBlocks)
+        {
+            if (!b.boxSearchData.visited)
             {
-                dst[i + dst_pos.X, j + dst_pos.Y] = dst[i, j];
+                all_unstable_blocks.Add(b);
+            }
+            else
+            {
+                for (int i = 0; i < b.BlocksBelow.Count; i++)
+                {
+                    if (!b.BlocksBelow[i].boxSearchData.visited)
+                    {
+                        b.RemoveLinkWithBelow(b.BlocksBelow[i]);
+                        i--;
+                    }
+                }
             }
         }
+        return all_unstable_blocks;
     }
 }
