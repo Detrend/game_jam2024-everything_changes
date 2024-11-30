@@ -69,7 +69,7 @@ public class BlockGrid : MonoBehaviour
         }
         if (_allBlocks.Count == 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
     }
