@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6558651873507594520
+--- !u!1001 &9216131623669401423
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,26 +11,30 @@ PrefabInstance:
     - target: {fileID: 1120806115652780185, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d0ea670ae32304a4ea2aa3706fcdbc10, type: 3}
+      objectReference: {fileID: 21300000, guid: d77f814fd2ad4244fa4430855dc94344, type: 3}
     - target: {fileID: 2021010636748731552, guid: aca7cec3889af354581554c5da09baad, type: 3}
-      propertyPath: m_Size.x
-      value: 2
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2021010636748731552, guid: aca7cec3889af354581554c5da09baad, type: 3}
-      propertyPath: m_Offset.x
-      value: 1
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2021010636748731552, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.9773829
+      value: 7.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021010636748731552, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 5.82
       objectReference: {fileID: 0}
     - target: {fileID: 2104622230402112152, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Name
-      value: ToiletPaperBlock
+      value: RoofBlock
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.y
@@ -67,10 +71,6 @@ PrefabInstance:
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
-      propertyPath: size.X
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
