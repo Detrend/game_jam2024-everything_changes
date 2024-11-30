@@ -182,6 +182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
+    - {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
@@ -213,6 +214,7 @@ MonoBehaviour:
     X: 1
     Y: 1
   canBeMoved: 1
+  blockType: 0
   ShootingRange: 4
   ShootingDegree: 45
   DamagePerHit: 25
