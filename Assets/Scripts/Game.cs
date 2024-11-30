@@ -49,8 +49,36 @@ public class Game : MonoBehaviour
         ScreenShaker.AddShake(objectFallScreenShake);
     }
 
+    private void OnDrawGizmos()
+    {
+      var tp = transform.position;
+      var prevCol = Gizmos.color;
+      Gizmos.color = Color.red;
 
-    private void Update()
+      // bottom
+      Gizmos.DrawLine(
+        tp + new Vector3(gameRegion.from.X, gameRegion.from.Y, 0.0f),
+        tp + new Vector3(gameRegion.to.X,   gameRegion.from.Y, 0.0f));
+
+      // top
+      Gizmos.DrawLine(
+        tp + new Vector3(gameRegion.from.X, gameRegion.to.Y, 0.0f),
+        tp + new Vector3(gameRegion.to.X,   gameRegion.to.Y, 0.0f));
+
+      // left
+      Gizmos.DrawLine(
+        tp + new Vector3(gameRegion.from.X, gameRegion.from.Y, 0.0f),
+        tp + new Vector3(gameRegion.from.X, gameRegion.to.Y, 0.0f));
+
+      // right
+      Gizmos.DrawLine(
+        tp + new Vector3(gameRegion.to.X, gameRegion.from.Y, 0.0f),
+        tp + new Vector3(gameRegion.to.X, gameRegion.to.Y, 0.0f));
+
+      Gizmos.color = prevCol;
+    }
+
+  private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
