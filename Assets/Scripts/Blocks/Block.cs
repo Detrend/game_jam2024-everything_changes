@@ -91,7 +91,7 @@ public class Block : MonoBehaviour
       Gizmos.DrawCube(transform.position, new Vector3(ratio, 0.25f, 0.0f));
     }
 
-  private void Awake()
+  protected void Awake()
     {
         _blocksAbove = new();
         _blocksBelow = new();
@@ -182,7 +182,7 @@ public class Block : MonoBehaviour
         _spriteRenderer.sortingOrder = 100;
     }
 
-    private void Update()
+    protected void Update()
     {
         foreach (Block above in BlocksAbove)
         {

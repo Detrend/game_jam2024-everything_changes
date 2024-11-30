@@ -251,11 +251,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6936388152532105537, guid: 48dcfc5d8dcbdca48bee3018534904cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 6936388152532105537, guid: 48dcfc5d8dcbdca48bee3018534904cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.01
+      value: -1.66
       objectReference: {fileID: 0}
     - target: {fileID: 6936388152532105537, guid: 48dcfc5d8dcbdca48bee3018534904cc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -288,6 +288,14 @@ PrefabInstance:
     - target: {fileID: 6936388152532105537, guid: 48dcfc5d8dcbdca48bee3018534904cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088756485501474373, guid: 48dcfc5d8dcbdca48bee3018534904cc, type: 3}
+      propertyPath: ShootingRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088756485501474373, guid: 48dcfc5d8dcbdca48bee3018534904cc, type: 3}
+      propertyPath: ShootingDegree
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
