@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1916543352150086089, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d970f6852aed2e6419764391d84d8903, type: 2}
     - target: {fileID: 2021010636748731552, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -92,8 +96,32 @@ PrefabInstance:
       propertyPath: size.X
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2898309738553280893, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4246053626062001808}
   m_SourcePrefab: {fileID: 100100000, guid: aca7cec3889af354581554c5da09baad, type: 3}
+--- !u!1 &7820404627807317145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2898309738553280893, guid: aca7cec3889af354581554c5da09baad, type: 3}
+  m_PrefabInstance: {fileID: 4953807629060187620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4246053626062001808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820404627807317145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d503ac8036d52c459ba4ef7dee03de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flooding: 0.9
+  floodingLimit: 0.3
+  volumePerParticle: 0.003
