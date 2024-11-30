@@ -56,7 +56,7 @@ MonoBehaviour:
       Y: -2
     to:
       X: 3
-      Y: 4
+      Y: 10
 --- !u!1 &5093810556972653223
 GameObject:
   m_ObjectHideFlags: 0
