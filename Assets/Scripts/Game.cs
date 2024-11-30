@@ -92,6 +92,10 @@ public class Game : MonoBehaviour
                 // Check if the clicked object is this object
                 if (hit_collider.gameObject.CompareTag("Block"))
                 {
+                    if (hit_collider.gameObject.GetComponent<BoxConveyorBeltControler>() != null)
+                    {
+                        hit_collider.gameObject.GetComponent<BoxConveyorBeltControler>().Selected();
+                    }
                     hit_collider.gameObject.GetComponent<Block>().Grab();
                 }
             }
