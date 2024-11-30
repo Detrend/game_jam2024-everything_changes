@@ -104,32 +104,32 @@ public class DisasterSpawner : MonoBehaviour
 
   void StartRain()
   {
-    Instantiate(RainObject, transform);
+    Instantiate(RainObject, transform.position, transform.rotation);
   }
 
   void StartTornado()
   {
-    Instantiate(TornadoObject, transform);
+    Instantiate(TornadoObject, transform.position, transform.rotation);
   }
 
   void StartFloods()
   {
-    Instantiate(FloodObject, transform);
+    Instantiate(FloodObject, transform.position, transform.rotation);
   }
 
   void StartEarthquake()
   {
-    Instantiate(EarthquakeObject, transform);
+    Instantiate(EarthquakeObject, transform.position, transform.rotation);
   }
 
   void SpawnZombie()
   {
-    Instantiate(ZombieObject, transform);
+    Instantiate(ZombieObject, transform.position, transform.rotation);
   }
 
   void StartUfo()
   {
-    Instantiate(UfoObject, transform);
+    Instantiate(UfoObject, transform.position, transform.rotation);
   }
 
   void Awake()
@@ -150,8 +150,19 @@ public class DisasterSpawner : MonoBehaviour
     
   }
 
+  void DoDebug()
+  {
+    if (Input.GetKeyDown(KeyCode.F2))
+    {
+      StartUfo();
+    }
+  }
+
   void Update()
   {
-    
+    if (Debug.isDebugBuild)
+    {
+      DoDebug();
+    }
   }
 }
