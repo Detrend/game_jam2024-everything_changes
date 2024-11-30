@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+public static class Math2
+{
+    public static int Square(int x) => x * x;
+    public static float Square(float x) => x * x;
+
+}
+
 [Serializable]
 public struct IVector2
 {
@@ -27,6 +35,8 @@ public struct IVector2
     public static IVector2 Min(IVector2 a, IVector2 b) => new(Mathf.Min(a.X, b.X), Mathf.Min(a.Y, b.Y));
     public static IVector2 Max(IVector2 a, IVector2 b) => new(Mathf.Max(a.X, b.X), Mathf.Max(a.Y, b.Y));
 
+    public static int DistanceL1(IVector2 a, IVector2 b) => Mathf.Abs(a.X - b.X) + Mathf.Abs(a.Y - b.Y);
+    public static float DistanceL2(IVector2 a, Vector2 b) => Mathf.Sqrt(Math2.Square(a.X - b.x) + Math2.Square(a.Y - b.y));
 
     public IEnumerable<IVector2> AllCoordinates
     {

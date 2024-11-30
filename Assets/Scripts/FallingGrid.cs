@@ -18,8 +18,6 @@ public class FallingGrid : BlockGrid
         Game.I.FallingGrids.Add(this);
     }
 
-
-
     private void Update()
     {
         foreach (Block b in _allBlocks)
@@ -95,7 +93,7 @@ public class FallingGrid : BlockGrid
             for (int j = Mathf.FloorToInt(fallOffset); j < block.size.Y + Mathf.CeilToInt(fallOffset); j++)
             {
                 IVector2 check = new IVector2(i, j) + pos;
-                if (!BBox.Contains(check) || this[check] != null) return false;
+                if (BBox.Contains(check) && this[check] != null) return false;
             }
         }
         return true;

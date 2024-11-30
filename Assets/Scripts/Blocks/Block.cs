@@ -26,8 +26,7 @@ public class Block : MonoBehaviour
     public bool canBeMoved = true;
 
     private bool _grabbed;
-    private IVector2 _grabbedPart;
-    private IVector2 _lastValidPosition;
+    //private IVector2 _grabbedPart;
 
     private BlockGrid _parentGrid = null;
 
@@ -128,8 +127,7 @@ public class Block : MonoBehaviour
         Game.I.HouseGrid.CreateFallingGridFromUnstable();
 
         _grabbed = true;
-        _grabbedPart = Game.MouseWorldPos.ToIVec() - transform.position.ToIVec();
-        _lastValidPosition = BBox.from;
+        //_grabbedPart = Game.MouseWorldPos.ToIVec() - transform.position.ToIVec();
         _material.SetInt("_Ghost", 1);
         _spriteRenderer.sortingOrder = 100;
     }
@@ -145,17 +143,18 @@ public class Block : MonoBehaviour
 
         if (_grabbed)
         {
-            IVector2 int_pos = Game.MouseWorldPos.ToIVec() - _grabbedPart;
-            transform.position = int_pos.ToVec();
+            Vector2 cur_pos = Game.MouseWorldPos - BBox.Size.ToVec() / 2 + Vector2.one * 0.5f;
+            IVector2 int_pos = cur_pos.ToIVec();
 
             bool valid_placement = Game.CanPlaceBlockAt(this, int_pos);
-            _material.SetInt("_PlacementValid", valid_placement ? 1 : 0);
+            _material.SetInt("_PlacementValid", 1);// valid_placement ? 1 : 0);
+            IVector2 place_pos = Game.I.ClosestValidPosition(this, cur_pos);
+            transform.position = place_pos.ToVec();
 
-            if (valid_placement) _lastValidPosition = int_pos;
             if (Input.GetMouseButtonUp(0))
             {
-                transform.position = _lastValidPosition.ToVec();
-                Place(Game.I.HouseGrid, _lastValidPosition, true);
+                transform.position = place_pos.ToVec();
+                Place(Game.I.HouseGrid, place_pos, true);
                 
                 _grabbed = false;
                 _material.SetInt("_Ghost", 0);
