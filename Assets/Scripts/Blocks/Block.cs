@@ -10,6 +10,7 @@ using UnityEngine;
 public struct BoxSearchData
 {
     public bool visited;
+    public int belong;
 }
 
 
@@ -94,6 +95,12 @@ public class Block : MonoBehaviour
         return 0.0f;
     }
 
+    public void ReactToVelocityChange(float amount)
+    {
+        DealDamage(amount * 0.5f);
+        if (_flooding!= null) _flooding.waveAmount = amount / 5f;
+    }
+
     private void OnDrawGizmos()
     {
       float max = GetMaxHP();
@@ -115,6 +122,12 @@ public class Block : MonoBehaviour
         _BBox = new(((Vector2)transform.position).ToIVec(), size);
         transform.position = _BBox.from.ToVec();
 
+        
+    }
+
+
+    private void Start()
+    {
         _flooding = GetComponentInChildren<Flooding>();
     }
 

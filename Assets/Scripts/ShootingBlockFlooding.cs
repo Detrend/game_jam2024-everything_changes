@@ -9,8 +9,9 @@ public class ShootingBlockFlooding : Flooding
     public float volumePerParticle = 0.01f;
     float _currentParticleProgress = 0f;
 
-    private void Update()
+    protected override void MyUpdate()
     {
+        base.MyUpdate();
         if (FloodingAmount > floodingLimit)
         {
 

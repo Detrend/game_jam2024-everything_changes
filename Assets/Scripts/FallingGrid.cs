@@ -84,6 +84,12 @@ public class FallingGrid : BlockGrid
 
                 int total_boxes_present = FilledBlockAmount;
 
+
+                Search.SetBelongingFlag(AllBlocks, Search.belongingTracker++);
+                Search.SetBelongingFlag(another.AllBlocks, Search.belongingTracker++);
+
+
+                List<Block> moved_boxes = new();
                 // all marked true = stable. All marked false = unstable.
                 for (int i = 0; i < _allBlocks.Count; i++)
                 {
@@ -93,6 +99,7 @@ public class FallingGrid : BlockGrid
                         b.RemoveFromGrid();
                         b.Place(another, b.BBox.from - new IVector2(0, current_move), true);
                         i--;
+                        moved_boxes.Add(b);
                         // TODO APPLY DAMAGE. BOX STOPPED
                     }
                     else
@@ -108,10 +115,10 @@ public class FallingGrid : BlockGrid
                         }
                     }
                 }
-
                 int boxes_transferred = total_boxes_present - FilledBlockAmount;
                 float impact_energy;
                 float new_fall_speed;
+
                 if (another_fg == null)
                 {
                     new_fall_speed = 0f;
@@ -121,8 +128,25 @@ public class FallingGrid : BlockGrid
                 {
                     new_fall_speed = Mathf.Lerp(another_fg.fallSpeed, fallSpeed, 1f * boxes_transferred / another_fg.FilledBlockAmount);
                     impact_energy = (new_fall_speed - another_fg.fallSpeed) * (another_fg.FilledBlockAmount - boxes_transferred) + (fallSpeed - new_fall_speed) * boxes_transferred;
+                }
+
+                foreach (Block b in another.AllBlocks)
+                {
+                    //Was in the other grid (where we moved blocks rn)
+                    if (b.boxSearchData.belong == Search.belongingTracker - 1)
+                    {
+                        b.ReactToVelocityChange(new_fall_speed - (another_fg == null ? 0f : another_fg.fallSpeed));
+                    }
+                    else
+                    {
+                        b.ReactToVelocityChange(fallSpeed - new_fall_speed);
+                    }
+                }
+
+                if (another_fg != null) {
                     another_fg.fallSpeed = new_fall_speed;
                 }
+
                 Game.I.objectFallScreenShake._amount += 0.01f * impact_energy;
 
                 int total_particle_count = 5 * (int) impact_energy;

@@ -32,6 +32,16 @@ public class ScreenShake
         }
         return _amount * dif;
     }
+
+    public float CurrentMagnitude()
+    {
+        float x = 0f;
+        foreach ((Vector2 t, float _) in _shakeVectors)
+        {
+            x += t.magnitude;
+        }
+        return x * _amount;
+    }
 }
 
 
@@ -80,4 +90,12 @@ public class ScreenShaker : MonoBehaviour
 
             Camera.main.transform.position = m_InitialCameraPos + (Vector3) dif;// + axis3 + axis4 + axis5) * 0.2f;
       }
+
+    public float CurrentMagnitude()
+    {
+        float x = 0f;
+        foreach (ScreenShake s in _shakes)
+            x += s.CurrentMagnitude();
+        return x;
+    }
 }
