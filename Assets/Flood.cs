@@ -52,11 +52,11 @@ public class Flood : MonoBehaviour
     if (m_Duration > 0.0f)
     {
       // deal damage to blocks
-      for (int h = 0; h < Height; ++h)
+      for (int h = Game.I.gameRegion.from.Y; h < Game.I.gameRegion.from.Y + Height; ++h)
       {
-        for (int i = 0; i < Game.I.gameRegion.Size.X; ++i)
+        for (int i = Game.I.gameRegion.from.X; i < Game.I.gameRegion.to.X; ++i)
         {
-          var block = Game.I.HouseGrid[new IVector2(i, h) + Game.I.gameRegion.from];
+          var block = Game.I.HouseGrid[new IVector2(i, h)];
           if (block != null)
           {
             // damage the block
