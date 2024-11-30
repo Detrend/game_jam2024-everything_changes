@@ -10,10 +10,24 @@ public class Earthquake : MonoBehaviour
 
   float m_TimeRemaining = 10.0f;
 
+    [SerializeField]
+    float earthquakeStrength = 1.0f;
+
+    ScreenShake _earthquakeScreenShake;
+
   void Start()
   {
-    m_TimeRemaining = Duration;
-  }
+        m_TimeRemaining = Duration;
+        _earthquakeScreenShake = new(0.4f)
+        {
+            _shakeVectors = new()
+            {
+                (new Vector2(1f, 0.1f), 70f),
+                (new Vector2(0.2f, 1f), 9f)
+            }
+        };
+        Game.I.ScreenShaker.AddShake(_earthquakeScreenShake);
+    }
 
   void Update()
   {
@@ -41,11 +55,11 @@ public class Earthquake : MonoBehaviour
       }
     }
 
-    Game.I.ScreenShaker.ShakeScreen(1.0f, 2.0f);
+    _earthquakeScreenShake._amount = earthquakeStrength;
   }
 
   void Despawn()
   {
-    GameObject.Destroy(gameObject);
+    Destroy(gameObject);
   }
 }
