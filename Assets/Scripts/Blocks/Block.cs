@@ -56,6 +56,7 @@ public class Block : MonoBehaviour
 
 
     Flooding _flooding;
+    public Flooding Flooding => _flooding;
 
 
     float _HP = 100.0f;
@@ -69,7 +70,8 @@ public class Block : MonoBehaviour
         set
         {
             _HP = value;
-            foregroundSpriteRenderer.material.SetFloat("_Hp", _HP / MaxHP);
+            if (foregroundSpriteRenderer != null)
+                foregroundSpriteRenderer.material.SetFloat("_Hp", _HP / MaxHP);
         }
     }
 
@@ -106,12 +108,12 @@ public class Block : MonoBehaviour
         if (_flooding!= null) _flooding.waveAmount = amount / 5f;
     }
 
-    private void OnDrawGizmos()
-    {
-      float ratio = MaxHP > 0.0f ? HP / MaxHP : 1.0f;
-      Gizmos.color = Color.green;
-      Gizmos.DrawCube(transform.position, new Vector3(ratio, 0.25f, 0.0f));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //  float ratio = MaxHP > 0.0f ? HP / MaxHP : 1.0f;
+    //  Gizmos.color = Color.green;
+    //  Gizmos.DrawCube(transform.position, new Vector3(ratio, 0.25f, 0.0f));
+    //}
 
   protected void Awake()
     {

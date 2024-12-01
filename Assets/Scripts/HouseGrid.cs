@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 
 
@@ -127,6 +128,37 @@ public class HouseGrid : BlockGrid
     //        }
     //    }
     //}
+
+    private void Update()
+    {
+        foreach (IVector2 pos in Game.I.gameRegion.AllCoordinates)
+        {
+            PropagateWater(pos, pos + new IVector2(1, 0), false);
+            PropagateWater(pos, pos + new IVector2(-1, 0), false);
+            PropagateWater(pos, pos + new IVector2(0, -1), true);
+        }
+    }
+
+    private void PropagateWater(IVector2 from, IVector2 to, bool always)
+    {
+        
+        BlockRecord a = this[from];
+        BlockRecord b = this[to];
+        if (a != null && b != null && a.block != b.block)
+        {
+            Flooding af = a.block.Flooding;
+            Flooding bf = b.block.Flooding;
+
+            if ((af != null && bf != null) && (always || af.FloodingPercent - 0.2f > bf.FloodingPercent) && bf.FloodingPercent < 1f && af.FloodingPercent > 0f)
+            {
+                af.FloodingAmount -= 0.1f * Time.deltaTime;
+                bf.FloodingAmount += 0.1f * Time.deltaTime;
+            }
+
+        }
+        
+    }
+
 
     public List<Block> AllUnstableBlocks()
     {

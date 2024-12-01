@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 3078064910074494204, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
       propertyPath: foregroundSpriteRenderer
       value: 
-      objectReference: {fileID: 1615863434}
+      objectReference: {fileID: 518508059}
     - target: {fileID: 6564615950361484266, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.266
@@ -178,6 +178,14 @@ PrefabInstance:
     - target: {fileID: 7121132353846320599, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
       propertyPath: m_Name
       value: RoofBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199659959988958191, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.1076324
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199659959988958191, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8100746306552514518, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
       propertyPath: m_Sprite
@@ -243,7 +251,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: d7cc8afa0ac5d4741b41d2908915b6a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -616,6 +624,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4922691571739138971, guid: 3ac610afc04e6ea4a9d5475a34c681b1, type: 3}
+      propertyPath: waterCapacity
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5057575254014872448, guid: 3ac610afc04e6ea4a9d5475a34c681b1, type: 3}
       propertyPath: m_Name
       value: ToiletPaperBlock (1)
@@ -1082,11 +1094,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ac610afc04e6ea4a9d5475a34c681b1, type: 3}
---- !u!212 &1615863434 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8100746306552514518, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}
-  m_PrefabInstance: {fileID: 259168781}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1615863436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6564615950361484266, guid: e40a4c0c21153ab49bba4f1bb95a58bb, type: 3}

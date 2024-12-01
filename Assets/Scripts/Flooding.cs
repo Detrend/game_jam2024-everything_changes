@@ -19,6 +19,15 @@ public class Flooding : MonoBehaviour
 
     public float FloodingAmount
     {
+        get => FloodingPercent * waterCapacity;
+        set
+        {
+            FloodingPercent = value / waterCapacity;
+        }
+    }
+
+    public float FloodingPercent
+    {
         get => _flooding;
         set
         {
