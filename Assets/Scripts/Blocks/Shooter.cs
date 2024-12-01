@@ -17,10 +17,10 @@ public class Shooter : Block
   public float ReloadTime = 0.5f;
 
   float m_Reload      = 0.0f;
-  float m_RotateAngle = 0.0f;
 
   GameObject m_Gun    = null;
   GameObject m_Muzzle = null;
+  AudioSource m_Audio = null;
 
   private void Awake()
   {
@@ -28,6 +28,7 @@ public class Shooter : Block
     m_Gun    = transform.Find("Gun")?.gameObject;
     m_Muzzle = m_Gun.transform.Find("muzzle")?.gameObject;
     m_Muzzle.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+    m_Audio = GetComponent<AudioSource>();
   }
 
   private void OnDrawGizmosSelected()
@@ -59,6 +60,11 @@ public class Shooter : Block
   private new void Update()
   {
     base.Update();
+
+    if (_parentGrid == null)
+    {
+      return;
+    }
 
     if (m_Reload > 0.0f)
     {
@@ -114,6 +120,7 @@ public class Shooter : Block
     {
       // choose best possible target
       target.DealDamage(DamagePerHit);
+      m_Audio.Play();
       m_Reload = ReloadTime;
     }
   }
