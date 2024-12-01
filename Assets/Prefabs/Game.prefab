@@ -5326,7 +5326,7 @@ MonoBehaviour:
     selfCooldown: 40
     otherCooldown: 25
   - disaster: 5
-    probability: 0.0165
+    probability: 0.0117
     intervalStart: 120
     selfCooldown: 20
     otherCooldown: 25
@@ -10652,6 +10652,7 @@ MonoBehaviour:
   canBeMoved: 0
   canBeDamaged: 0
   isSolid: 0
+  _parentGrid: {fileID: 0}
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 0}
