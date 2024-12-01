@@ -56,7 +56,7 @@ public class Earthquake : MonoBehaviour
     Search.ResetSearchFlags(Game.I.HouseGrid.AllBlocks);
     foreach (var block in blocks)
     {
-      if (block && block.IsSolid())
+      if (block && block.isSolid)
       {
         // drain HP
         Search.RunAboveBFS(block);

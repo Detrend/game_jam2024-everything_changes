@@ -35,7 +35,7 @@ public class Block : MonoBehaviour
 
     private bool _grabbed;
 
-    private BlockGrid _parentGrid = null;
+    public BlockGrid _parentGrid = null;
 
 
     SpriteRenderer _spriteRenderer;
@@ -85,11 +85,6 @@ public class Block : MonoBehaviour
     public virtual void DealWaterDamage(float amount)
     {
       
-    }
-
-    public virtual bool IsSolid()
-    {
-        return false;
     }
 
     public virtual float GetWaterAmount()
