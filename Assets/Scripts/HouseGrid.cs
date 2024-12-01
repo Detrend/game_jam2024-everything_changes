@@ -77,6 +77,13 @@ public class HouseGrid : BlockGrid
 
         _foundationBlock = GetComponentInChildren<Block>();
         _foundationBlock.Place(Game.I.HouseGrid, ((Vector2)_foundationBlock.transform.position).ToIVec(), false);
+
+        // MR says: place the toilet block on the grid if it is present in the level
+        var toilet = GameObject.Find("ToiletPaperBlock");
+        if (toilet != null && toilet.TryGetComponent(out Block toiletBlock))
+        {
+            toiletBlock.Place(Game.I.HouseGrid, ((Vector2)toiletBlock.transform.position).ToIVec(), false);
+        }
     }
 
 
