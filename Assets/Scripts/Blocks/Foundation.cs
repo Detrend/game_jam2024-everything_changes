@@ -9,16 +9,6 @@ public class Foundation : Block
       
     }
 
-    public override float GetHP()
-    {
-      return 100.0f;
-    }
-
-    public override float GetMaxHP()
-    {
-        return 100.0f;
-    }
-
     public override void DealWaterDamage(float amount)
     {
       
@@ -31,6 +21,6 @@ public class Foundation : Block
 
     public override float GetMaxWaterAmount()
     {
-        return 100.0f;
+        return 0f;
     }
 }

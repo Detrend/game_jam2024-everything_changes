@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6081351460517011371, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbbf505730bbd7d419ad00e51c47126a, type: 2}
     - target: {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: size.X
       value: 1
@@ -193,6 +197,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8088756485501474373}
   m_SourcePrefab: {fileID: 100100000, guid: aca7cec3889af354581554c5da09baad, type: 3}
+--- !u!212 &1214345876742077007 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6081351460517011371, guid: aca7cec3889af354581554c5da09baad, type: 3}
+  m_PrefabInstance: {fileID: 4953807629060187620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6452087125147041660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2104622230402112152, guid: aca7cec3889af354581554c5da09baad, type: 3}
@@ -215,6 +224,8 @@ MonoBehaviour:
     Y: 1
   canBeMoved: 1
   blockType: 0
+  MaxHP: 100
+  foregroundSpriteRenderer: {fileID: 1214345876742077007}
   ShootingRange: 4
   ShootingDegree: 45
   DamagePerHit: 25

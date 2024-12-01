@@ -30,9 +30,10 @@ public class Block : MonoBehaviour
     public IVector2 size;
 
     public bool canBeMoved = true;
+    public bool canBeDamaged = true;
+    public bool isSolid = false;
 
     private bool _grabbed;
-    //private IVector2 _grabbedPart;
 
     private BlockGrid _parentGrid = null;
 
@@ -57,22 +58,26 @@ public class Block : MonoBehaviour
     Flooding _flooding;
 
 
-    float m_HP = 100.0f;
+    float _HP = 100.0f;
+    public float MaxHP = 100f;
+
+    public SpriteRenderer foregroundSpriteRenderer;
+
+    private float HP
+    {
+        get => _HP;
+        set
+        {
+            _HP = value;
+            foregroundSpriteRenderer.material.SetFloat("_Hp", _HP / MaxHP);
+        }
+    }
+
 
     public virtual void DealDamage(float dmg)
     {
-      m_HP -= dmg;
-      m_HP = Mathf.Max(m_HP, 0.0f);
-    }
-
-    public virtual float GetHP()
-    {
-        return m_HP;
-    }
-
-    public virtual float GetMaxHP()
-    {
-        return 100.0f;
+        if (!canBeDamaged) return;
+        HP = Mathf.Max(HP - dmg, 0f);
     }
 
     public virtual void DealWaterDamage(float amount)
@@ -85,27 +90,25 @@ public class Block : MonoBehaviour
         return false;
     }
 
-  public virtual float GetWaterAmount()
+    public virtual float GetWaterAmount()
     {
-        return 0.0f;
+        return _flooding.FloodingAmount;
     }
 
     public virtual float GetMaxWaterAmount()
     {
-        return 0.0f;
+        return _flooding.waterCapacity;
     }
 
     public void ReactToVelocityChange(float amount)
     {
-        DealDamage(amount * 0.5f);
+        DealDamage(amount * 2f);
         if (_flooding!= null) _flooding.waveAmount = amount / 5f;
     }
 
     private void OnDrawGizmos()
     {
-      float max = GetMaxHP();
-      float hp  = GetHP();
-      float ratio = max > 0.0f ? hp / max : 1.0f;
+      float ratio = MaxHP > 0.0f ? HP / MaxHP : 1.0f;
       Gizmos.color = Color.green;
       Gizmos.DrawCube(transform.position, new Vector3(ratio, 0.25f, 0.0f));
     }
@@ -121,14 +124,13 @@ public class Block : MonoBehaviour
 
         _BBox = new(((Vector2)transform.position).ToIVec(), size);
         transform.position = _BBox.from.ToVec();
-
-        
     }
 
 
     private void Start()
     {
         _flooding = GetComponentInChildren<Flooding>();
+        HP = HP;
     }
 
     public void Place(BlockGrid grid, IVector2 pos, bool search_above_below)
@@ -136,6 +138,9 @@ public class Block : MonoBehaviour
         _BBox = new BBox(pos, size);
         grid.AddBlockAt(this, pos);
         _parentGrid = grid;
+
+        for (int child_i = 0; child_i < transform.childCount; child_i++)
+            transform.GetChild(child_i).gameObject.SetActive(true);
 
         transform.position = _BBox.from.ToVec();
        
@@ -191,6 +196,10 @@ public class Block : MonoBehaviour
         _material.SetInt("_InHouseGrid", 0);
         if (_parentGrid != null)
             _parentGrid.RemoveBlockAt(BBox.from);
+
+
+        for (int child_i = 0; child_i < transform.childCount; child_i++)
+            transform.GetChild(child_i).gameObject.SetActive(false);
 
 
         foreach (Block block_above in _blocksAbove)
