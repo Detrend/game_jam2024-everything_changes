@@ -17,9 +17,14 @@ public class Shooter : Block
   public float ReloadTime = 0.5f;
 
   [SerializeField]
+  GameObject Bullet;
+
+  [SerializeField]
   AudioClip ShootSfx;
 
   float m_Reload      = 0.0f;
+  float m_Rot = 0.0f;
+  float m_TargetRot = 0.0f;
 
   GameObject m_Gun    = null;
   GameObject m_Muzzle = null;
@@ -99,19 +104,18 @@ public class Shooter : Block
       }
     }
 
-    if (target)
+    m_TargetRot = bestAngle;
+
+    m_Rot += (m_TargetRot - m_Rot) * Time.deltaTime;
+
+    if (m_Gun)
     {
-      var pos = target.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
-      m_Gun.transform.rotation = Quaternion.AngleAxis(-bestAngle, Vector3.forward);
-    }
-    else
-    {
-      m_Gun.transform.rotation = transform.rotation;
+      m_Gun.transform.rotation = Quaternion.AngleAxis(-m_Rot, Vector3.forward);
     }
 
     if ((m_Reload / ReloadTime) > 0.8f)
     {
-      m_Muzzle.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+      m_Muzzle.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
     }
     else
     {
@@ -127,6 +131,13 @@ public class Shooter : Block
       if (m_Audio && ShootSfx)
       {
         m_Audio.PlayOneShot(ShootSfx);
+      }
+
+      m_Rot -= 5.0f;
+
+      if (Bullet && m_Gun)
+      {
+        Instantiate(Bullet, m_Gun.transform.position, Quaternion.identity);
       }
     }
   }
