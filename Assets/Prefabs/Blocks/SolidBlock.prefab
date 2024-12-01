@@ -58,7 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: _flooding
-      value: 0.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: waterCapacity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2406369952687994830, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalScale.x
