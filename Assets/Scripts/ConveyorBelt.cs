@@ -24,18 +24,18 @@ public class ConveyorBelt : MonoBehaviour
 
     private List<float[]> _probDistributions = new List<float[]>()
     {
-        new float[] { 6.5f, 0.0f, 1.0f, 0.0f, 0.0f },
-        new float[] { 5.5f, 0.5f, 2.0f, 0.5f, 0.0f },
+        new float[] { 6.5f, 0.0f, 0.0f, 0.0f, 0.0f },
+        new float[] { 5.5f, 0.5f, 2.0f, 0.0f, 0.0f },
+        new float[] { 3.5f, 1.5f, 2.0f, 0.5f, 0.0f },
+        new float[] { 3.0f, 3.5f, 1.5f, 1.5f, 0.0f },
         new float[] { 3.5f, 1.5f, 2.0f, 1.0f, 0.0f },
-        new float[] { 2.5f, 3.5f, 1.5f, 3.5f, 0.0f },
-        new float[] { 2.5f, 1.0f, 2.0f, 1.5f, 0.0f },
         
     };
 
     private float _startTime;
     private List<float> _distributionTimings = new List<float>()
     {
-        20f, 35f, 60f, 100f,
+        35f, 70f, 105f, 195f,
     };
 
     // Start is called before the first frame update
