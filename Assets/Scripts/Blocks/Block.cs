@@ -189,16 +189,12 @@ public class Block : MonoBehaviour
     }
 
 
-
-
-    public void Grab()
+    private void RemoveFromGridAndSever()
     {
-        if (!canBeMoved) return;
-
         _material.SetInt("_InHouseGrid", 0);
         if (_parentGrid != null)
             _parentGrid.RemoveBlockAt(BBox.from);
-
+        _parentGrid=null;
 
         for (int child_i = 0; child_i < transform.childCount; child_i++)
             transform.GetChild(child_i).gameObject.SetActive(false);
@@ -213,6 +209,13 @@ public class Block : MonoBehaviour
         _blocksBelow.Clear();
 
         Game.I.HouseGrid.CreateFallingGridFromUnstable();
+    }
+
+    public void Grab()
+    {
+        if (!canBeMoved) return;
+
+        RemoveFromGridAndSever();
 
         _grabbed = true;
         //_grabbedPart = Game.MouseWorldPos.ToIVec() - transform.position.ToIVec();
@@ -222,6 +225,16 @@ public class Block : MonoBehaviour
 
     protected void Update()
     {
+        if (HP == 0f && _parentGrid != null)
+        {
+            RemoveFromGridAndSever();
+            var rb = gameObject.GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            _spriteRenderer.sortingOrder = -10;
+            rb.excludeLayers = LayerMask.GetMask("Default");
+        }
+
+
         foreach (Block above in BlocksAbove)
         {
             Vector2 a = above.BBox.Center, b = BBox.Center;

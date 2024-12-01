@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 
 
@@ -151,8 +150,10 @@ public class HouseGrid : BlockGrid
 
             if ((af != null && bf != null) && (always || af.FloodingPercent - 0.2f > bf.FloodingPercent) && bf.FloodingPercent < 1f && af.FloodingPercent > 0f)
             {
-                af.FloodingAmount -= 0.1f * Time.deltaTime;
-                bf.FloodingAmount += 0.1f * Time.deltaTime;
+                float delta = 0.1f * Time.deltaTime * af.FloodingPercent;
+
+                af.FloodingAmount -= delta;
+                bf.FloodingAmount += delta;
             }
 
         }

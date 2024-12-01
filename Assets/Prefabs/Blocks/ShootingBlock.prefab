@@ -138,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.y
@@ -198,7 +198,7 @@ PrefabInstance:
       addedObject: {fileID: 8088756485501474373}
     - targetCorrespondingSourceObject: {fileID: 2898309738553280893, guid: aca7cec3889af354581554c5da09baad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 174504396519461850}
+      addedObject: {fileID: 542535477385531121}
   m_SourcePrefab: {fileID: 100100000, guid: aca7cec3889af354581554c5da09baad, type: 3}
 --- !u!212 &1214345876742077007 stripped
 SpriteRenderer:
@@ -245,7 +245,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2898309738553280893, guid: aca7cec3889af354581554c5da09baad, type: 3}
   m_PrefabInstance: {fileID: 4953807629060187620}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &174504396519461850
+--- !u!114 &542535477385531121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,9 +254,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7820404627807317145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 570849a6bad26444796fa99170efb6de, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d503ac8036d52c459ba4ef7dee03de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _flooding: 0.5
   waterCapacity: 1
   waveAmount: 1
+  floodingLimit: 0.3
+  volumePerParticle: 0.003
