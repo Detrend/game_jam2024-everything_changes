@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 2584751359163188709}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.499, y: 0.095, z: 0}
-  m_LocalScale: {x: 0.089601, y: 0.089601, z: 0.089601}
+  m_LocalPosition: {x: 0.538, y: 0.095, z: 0}
+  m_LocalScale: {x: 0.15902945, y: 0.11890053, z: 0.11890053}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4461161403290579284}
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 17
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9811321, g: 0.7696042, b: 0.41189036, a: 1}
+  m_Color: {r: 1, g: 0.9490566, b: 0.8632076, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -338,6 +338,7 @@ MonoBehaviour:
   ShootingDegree: 55
   DamagePerHit: 25
   ReloadTime: 0.5
+  Bullet: {fileID: 3818474906803689809, guid: 6e0e0680ea5db954e8ea95d16af1d2e8, type: 3}
   ShootSfx: {fileID: 8300000, guid: 7c6925f2dac16c745be7e3b43b21c92b, type: 3}
 --- !u!82 &3565862275205513965
 AudioSource:
