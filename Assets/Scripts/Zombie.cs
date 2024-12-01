@@ -49,9 +49,16 @@ public class Zombie : MonoBehaviour
 
     m_JustDamaged = Mathf.Max(m_JustDamaged - Time.deltaTime, 0.0f);
 
-    if (m_JustDamaged > 0.0f)
+    if (TryGetComponent(out SpriteRenderer rnd))
     {
-      // shine
+      if (m_JustDamaged > 0.0f)
+      {
+        rnd.color = new Color(1, 0, 0, 1);
+      }
+      else
+      {
+        rnd.color = new Color(1, 1, 1, 1);
+      }
     }
 
     Block attack = null;
