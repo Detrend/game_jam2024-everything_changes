@@ -1087,18 +1087,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
-    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: swapPrefab
-      value: 
-      objectReference: {fileID: 2696568865742267019, guid: e22405835cf4e0440b97fd4becd0578a, type: 3}
-    - target: {fileID: 7832401591170005628, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: canBeDamaged
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2824952393032594901, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-    - {fileID: 3374270210763430244, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
