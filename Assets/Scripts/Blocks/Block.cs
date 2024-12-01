@@ -144,7 +144,7 @@ public class Block : MonoBehaviour
         HP = HP;
     }
 
-    public void Place(BlockGrid grid, IVector2 pos, bool search_above_below)
+    public void Place(BlockGrid grid, IVector2 pos, bool search_above_below, bool create_falling_grid = true)
     {
         BBox = new BBox(pos, size);
         grid.AddBlockAt(this, pos);
@@ -173,7 +173,8 @@ public class Block : MonoBehaviour
                 if (block_above != null && !_blocksAbove.Contains(block_above.block)) LinkWithAbove(block_above.block);
             }
         }
-        Game.I.HouseGrid.CreateFallingGridFromUnstable();
+        if (create_falling_grid)
+            Game.I.HouseGrid.CreateFallingGridFromUnstable();
     }
 
     public void RemoveFromGrid()
@@ -203,7 +204,7 @@ public class Block : MonoBehaviour
     }
 
 
-    private void RemoveFromGridAndSever()
+    public void RemoveFromGridAndSever(bool create_falling_grid = true)
     {
         //_material.SetInt("_InHouseGrid", 0);
         if (_parentGrid != null)
@@ -222,7 +223,8 @@ public class Block : MonoBehaviour
             block_below.BlocksAbove.Remove(this);
         _blocksBelow.Clear();
 
-        Game.I.HouseGrid.CreateFallingGridFromUnstable();
+        if (create_falling_grid)
+            Game.I.HouseGrid.CreateFallingGridFromUnstable();
     }
 
     public void Grab()

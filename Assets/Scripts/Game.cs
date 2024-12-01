@@ -23,6 +23,8 @@ public class Game : MonoBehaviour
     public ParticleSystem objectFallSparks;
     public ParticleSystem floodParticles;
 
+    public GameObject swapPrefab;
+
 
     public BBox gameRegion;
 
@@ -149,11 +151,11 @@ public class Game : MonoBehaviour
     }
 
 
-    public static IVector2 RandomGridPosition(IVector2 size)
+    public static IVector2 RandomGridPosition()
     {
         return new IVector2(
-            UnityEngine.Random.Range(I.gameRegion.from.X, I.gameRegion.to.X - size.X + 1),
-            UnityEngine.Random.Range(I.gameRegion.from.Y, I.gameRegion.to.Y - size.Y + 1)
+            UnityEngine.Random.Range(I.gameRegion.from.X, I.gameRegion.to.X),
+            UnityEngine.Random.Range(I.gameRegion.from.Y, I.gameRegion.to.Y)
         );
     }
 

@@ -12,9 +12,6 @@ public class FloodPrefab : MonoBehaviour
     float remaining_duration = 7;
     public int maxWidth = 3;
     public float floodingStrength = 0.3f;
-    float distanceX;
-    float speedX;
-    float startTime;
 
 
     ParticleSystem.Particle[] _particles;
@@ -23,9 +20,6 @@ public class FloodPrefab : MonoBehaviour
     void Start()
     {
         _ps = GetComponent<ParticleSystem>();
-        distanceX = transform.position.x;
-        speedX = -_ps.velocityOverLifetime.x.constant;
-        startTime = Time.time;
         _particles = new ParticleSystem.Particle[_ps.main.maxParticles];
 
         transform.position = new Vector3(0, 0, 0);
