@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,11 +20,13 @@ public class IncomingDisaster
 {
   public DisasterType disaster;
   public float        remaining;
+  public int          id;
 
-  public IncomingDisaster(DisasterType disaster, float remaining)
+  public IncomingDisaster(DisasterType disaster, float remaining, int id)
   {
     this.disaster  = disaster;
     this.remaining = remaining;
+    this.id        = id;
   }
 }
 
@@ -51,10 +53,10 @@ public class DisasterManager : MonoBehaviour
   public float DebugStartFrom = 0.0f;
 
   [SerializeField]
-  public UnityEvent<DisasterType> OnDisasterStarted = new UnityEvent<DisasterType>();
+  public UnityEvent<DisasterType, int> OnDisasterStarted = new UnityEvent<DisasterType, int>();
 
   [SerializeField]
-  public UnityEvent<DisasterType> OnDisasterScheduled = new UnityEvent<DisasterType>();
+  public UnityEvent<DisasterType, int> OnDisasterScheduled = new UnityEvent<DisasterType, int>();
 
   [SerializeField]
   public List<DisasterSettings> Probabilities = new List<DisasterSettings>();
@@ -72,6 +74,7 @@ public class DisasterManager : MonoBehaviour
   System.Random m_Randomizer;
   float         m_TimeSinceLevelStart = 0.0f;
   float         m_GlobalCooldown = 0.0f;
+  int           m_DisasterCount = 0;
 
   void Awake()
   {
@@ -148,7 +151,7 @@ public class DisasterManager : MonoBehaviour
       incoming.remaining -= Time.deltaTime;
       if (incoming.remaining <= 0.0f)
       {
-        OnDisasterStartedInternal(incoming.disaster);
+        OnDisasterStartedInternal(incoming.disaster, incoming.id);
       }
     }
 
@@ -176,20 +179,20 @@ public class DisasterManager : MonoBehaviour
     return m_Settings[type].probability;
   }
 
-  void OnDisasterScheduledInternal(DisasterType type)
+  void OnDisasterScheduledInternal(DisasterType type, int id)
   {
     float cooldown = m_Settings[type].otherCooldown;
     m_GlobalCooldown = Mathf.Max(cooldown, m_GlobalCooldown);
 
     m_Cooldowns[type] = m_Settings[type].selfCooldown;
 
-    OnDisasterScheduled.Invoke(type);
+    OnDisasterScheduled.Invoke(type, id);
     Debug.Log($"[Disaster Manager] Info: disaster of type \"{type}\" was scheduled.");
   }
 
-  void OnDisasterStartedInternal(DisasterType type)
+  void OnDisasterStartedInternal(DisasterType type, int id)
   {
-    OnDisasterStarted.Invoke(type);
+    OnDisasterStarted.Invoke(type, id);
     Debug.Log($"[Disaster Manager] Info: disaster of type \"{type}\" started.");
   }
 
@@ -209,7 +212,7 @@ public class DisasterManager : MonoBehaviour
     {
       if (Input.GetKeyDown(startCode))
       {
-        OnDisasterStartedInternal(DisasterType.Zombies + (startCode - KeyCode.F2));
+        OnDisasterStartedInternal(DisasterType.Zombies + (startCode - KeyCode.F2), -1);
       }
     }
   }
@@ -275,8 +278,9 @@ public class DisasterManager : MonoBehaviour
       if (rnd >= startFrom && rnd < endAt)
       {
         // spawn this event
-        m_DisastersToCome.Add(new IncomingDisaster(prob.Item1, DisasterSpawnAheadTime));
-        OnDisasterScheduledInternal(prob.Item1);
+        var id = ++m_DisasterCount;
+        m_DisastersToCome.Add(new IncomingDisaster(prob.Item1, DisasterSpawnAheadTime, id));
+        OnDisasterScheduledInternal(prob.Item1, id);
         break;
       }
 
@@ -285,6 +289,8 @@ public class DisasterManager : MonoBehaviour
   }
 
   List<IncomingDisaster> m_DisastersToCome = new List<IncomingDisaster>();
+
+  public List<IncomingDisaster> GetIncoming() => m_DisastersToCome;
 
   // Accumulate the update time
   float m_TimeAccum       = 0.0f;

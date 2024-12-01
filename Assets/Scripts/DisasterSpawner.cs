@@ -33,7 +33,7 @@ public class DisasterSpawner : MonoBehaviour
   // PRIVATE //
   System.Random m_Randomizer;
 
-  public void OnDisasterStarted(DisasterType type)
+  public void OnDisasterStarted(DisasterType type, int id)
   {
     switch (type)
     {
@@ -81,7 +81,7 @@ public class DisasterSpawner : MonoBehaviour
     }
   }
 
-  public void OnDisasterScheduled(DisasterType type)
+  public void OnDisasterScheduled(DisasterType type, int id)
   {
     
   }
