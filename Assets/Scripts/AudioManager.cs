@@ -46,6 +46,7 @@ public class AudioManager : MonoBehaviour
                 currentClip = 0;
             }
             _audioSource.clip = _musicClips[currentClip];
+            _audioSource.pitch = Random.Range(0.85f, 1.15f);
             _audioSource.Play(10 * (ulong)Random.Range(0, 400));
         }
         
