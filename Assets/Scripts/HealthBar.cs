@@ -5,6 +5,8 @@ using UnityEngine;
 using DG.Tweening;
 using DG;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class HealthBar : MonoBehaviour
 {
@@ -121,10 +123,11 @@ public class HealthBar : MonoBehaviour
         int oldHPbits = (int)(oldHP / _healthToBitsRatio);
         _healthBits = (int)(Health / _healthToBitsRatio);
 
-        if (Health < 0)
+        if (Health <= 0)
         {
             Health = 0;
             Debug.Log("Game Over");
+            SceneManager.LoadScene("GameOver");
             return;
         }
 

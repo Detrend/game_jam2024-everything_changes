@@ -19,10 +19,14 @@ public class Earthquake : MonoBehaviour
   [SerializeField]
   float earthquakeStrength = 1.0f;
 
+  [SerializeField]
+  AudioClip _earthquakeSfx;
+
     ScreenShake _earthquakeScreenShake;
 
   void Start()
   {
+        GetComponent<AudioSource>().PlayOneShot(_earthquakeSfx);
         m_TimeRemaining = Duration;
         _earthquakeScreenShake = new(0.4f)
         {
@@ -69,6 +73,10 @@ public class Earthquake : MonoBehaviour
       if (!block.boxSearchData.visited)
       {
         int height = block.BBox.from.Y - Game.I.gameRegion.from.Y;
+        if (height == 1)
+        {
+          height -= 1;
+        }
         float dmg = (DamagePerSecond + height * DamagePerSecondHeight) * Time.deltaTime;
         block.DealDamage(dmg);
       }

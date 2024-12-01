@@ -27,6 +27,8 @@ public class RainCloud : MonoBehaviour
         var vel = _particleSystem.velocityOverLifetime;
         vel.x = new ParticleSystem.MinMaxCurve(speed * tangent.x);
         vel.y = new ParticleSystem.MinMaxCurve(speed * tangent.y);
+
+        transform.position = new Vector3(15, 10, 0);
     }
 
     // Update is called once per frame
