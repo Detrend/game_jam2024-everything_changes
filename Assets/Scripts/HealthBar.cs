@@ -6,6 +6,7 @@ using DG.Tweening;
 using DG;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 
 public class HealthBar : MonoBehaviour
@@ -161,8 +162,12 @@ public class HealthBar : MonoBehaviour
                 {
                     _displayedBits--;
                     // destroy the hp bit
-                    _HP_bits[_displayedBits].DOFade(0.0f, 1f);
-                    Destroy(_HP_bits[_displayedBits].gameObject, 1f);
+                    _HP_bits[_displayedBits].DOFade(0.0f, 1.25f);
+                    // generate a random blend vector between down and right
+                    var blend = Random.Range(0.25f, 0.75f);
+                    _HP_bits[_displayedBits].transform.DOBlendableLocalMoveBy(blend * 1.5f * Vector3.right, 1.5f, false).SetEase(Ease.InOutBounce);
+                    _HP_bits[_displayedBits].transform.DOBlendableLocalMoveBy((1-blend) * 1.5f * Vector3.down, 1f, false).SetEase(Ease.InOutBounce);
+                    Destroy(_HP_bits[_displayedBits].gameObject, 1.51f);
                     _HP_bits[_displayedBits] = null;
                 }
                 else
