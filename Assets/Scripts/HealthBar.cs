@@ -23,6 +23,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _healthToBitsRatio;
     private int _maxBits;
 
+    ToiletBlock _toiletBlock;
+
     public const float MaxHealth = 100;
     [SerializeField]
     private float _maxAnimationTime = 1.0f;
@@ -36,6 +38,8 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _toiletBlock = FindAnyObjectByType<ToiletBlock>();
+        
         Health = MaxHealth;
         _healthBits = (int)(MaxHealth / _healthToBitsRatio);
         _displayedBits = _healthBits;
@@ -67,9 +71,6 @@ public class HealthBar : MonoBehaviour
             Debug.Log("Game Over");
             return;
         }
-        Debug.Log("old hp: " + oldHP + "bits: " + oldHPbits);
-        Debug.Log("hp: " + Health + "bits: " + _healthBits);
-
 
         if ( oldHPbits == _healthBits)
         {
@@ -92,8 +93,6 @@ public class HealthBar : MonoBehaviour
         Health = Math.Clamp(Health, 0, MaxHealth);
         int oldHPbits = (int)(oldHP / _healthToBitsRatio);
         _healthBits = (int)(Health / _healthToBitsRatio);
-        Debug.Log("old hp: " + oldHP + "bits: " + oldHPbits);
-        Debug.Log("hp: " + Health + "bits: " + _healthBits);
 
         if (oldHPbits == _healthBits)
         {
@@ -114,10 +113,44 @@ public class HealthBar : MonoBehaviour
         //int difference = _displayedBits - Health;
     }
 
+    public void UpdateBits()
+    {
+        float oldHP = Health;
+        Health = _toiletBlock.HP;
+        Health = Math.Clamp(Health, 0, MaxHealth);
+        int oldHPbits = (int)(oldHP / _healthToBitsRatio);
+        _healthBits = (int)(Health / _healthToBitsRatio);
+
+        if (Health < 0)
+        {
+            Health = 0;
+            Debug.Log("Game Over");
+            return;
+        }
+
+        if (oldHPbits == _healthBits)
+        {
+            return;
+        }
+        for (int i = _healthBits; i < oldHPbits; i++)
+        {
+            // gray out the hp bit
+        }
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(_healthBits != _displayedBits)
+        if (_toiletBlock == null)
+        {
+            // game over
+            return;
+        }
+        UpdateBits();
+        //Health = Math.Clamp(Health, 0, MaxHealth);
+
+        if (_healthBits != _displayedBits)
         {
             if (Time.time - _lastPieceLossTime > _oneHPLossTime)
             {

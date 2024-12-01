@@ -65,10 +65,10 @@ public class Block : MonoBehaviour
 
     public SpriteRenderer foregroundSpriteRenderer;
 
-    private float HP
+    public float HP
     {
         get => _HP;
-        set
+        private set
         {
             _HP = value;
             if (foregroundSpriteRenderer != null)
