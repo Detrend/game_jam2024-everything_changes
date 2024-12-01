@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -155,8 +154,8 @@ public class Block : MonoBehaviour
         {
             //m_AudioSrc.PlayOneShot(DropSfx);
         }
-
-        _material.SetInt("_InHouseGrid", _parentGrid == Game.I.HouseGrid ? 1 : 0);
+       
+        //_material.SetInt("_InHouseGrid", _parentGrid == Game.I.HouseGrid ? 1 : 0);
         
         if (search_above_below)
         {
@@ -201,7 +200,7 @@ public class Block : MonoBehaviour
 
     private void RemoveFromGridAndSever()
     {
-        _material.SetInt("_InHouseGrid", 0);
+        //_material.SetInt("_InHouseGrid", 0);
         if (_parentGrid != null)
             _parentGrid.RemoveBlockAt(BBox.from);
         _parentGrid=null;
