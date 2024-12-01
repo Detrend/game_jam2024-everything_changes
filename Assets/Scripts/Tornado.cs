@@ -19,6 +19,9 @@ public class Tornado : MonoBehaviour
   [SerializeField]
   public float HPStopThreshold = 20.0f;
 
+  [SerializeField]
+  public float TurbineDmg = 0.5f;
+
   enum TornadoState
   {
     MovingLeft,
@@ -51,6 +54,10 @@ public class Tornado : MonoBehaviour
         if (b != null)
         {
           top = b.block;
+          if (b.block.TryGetComponent(out Turbine t))
+          {
+            m_Duration -= TurbineDmg * Time.deltaTime;
+          }
         }
       }
 
