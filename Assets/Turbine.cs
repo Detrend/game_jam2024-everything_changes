@@ -8,7 +8,7 @@ public class Turbine : MonoBehaviour
   public int Range = 2;
 
   [SerializeField]
-  public int DrainAmountPerSecond = 10;
+  public float DrainAmountPerSecond = 10;
 
   void Start()
   {
@@ -39,7 +39,7 @@ public class Turbine : MonoBehaviour
         {
           // heal the block
           var other = Game.I.HouseGrid[coords];
-          if (other != null)
+          if (other != null && other.block.Flooding != null)
           {
             other.block.Flooding.FloodingAmount -= DrainAmountPerSecond * Time.deltaTime;
           }

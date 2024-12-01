@@ -5292,7 +5292,7 @@ MonoBehaviour:
         m_CallState: 2
   Probabilities:
   - disaster: 0
-    probability: 0.05
+    probability: 0.0656
     intervalStart: 0
     selfCooldown: 5
     otherCooldown: 0
@@ -10560,7 +10560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6734604676163659073, guid: 3cfd7ae3e172a294e875f7b77d4b7936, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7315667402215984452, guid: 3cfd7ae3e172a294e875f7b77d4b7936, type: 3}
       propertyPath: m_LocalScale.x
@@ -10639,6 +10639,8 @@ MonoBehaviour:
   canBeDamaged: 0
   isSolid: 0
   _parentGrid: {fileID: 0}
+  GrabSfx: {fileID: 0}
+  DropSfx: {fileID: 0}
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 0}

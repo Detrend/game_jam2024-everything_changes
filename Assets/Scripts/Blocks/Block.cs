@@ -42,6 +42,13 @@ public class Block : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     Material _material;
 
+    [SerializeField]
+    public AudioClip GrabSfx;
+
+    [SerializeField]
+    public AudioClip DropSfx;
+
+    AudioSource m_AudioSrc;
 
     List<Block> _blocksAbove;
     List<Block> _blocksBelow;
@@ -122,6 +129,8 @@ public class Block : MonoBehaviour
 
         _BBox = new(((Vector2)transform.position).ToIVec(), size);
         transform.position = _BBox.from.ToVec();
+
+        m_AudioSrc = GetComponent<AudioSource>();
     }
 
 
@@ -141,7 +150,12 @@ public class Block : MonoBehaviour
             transform.GetChild(child_i).gameObject.SetActive(true);
 
         transform.position = _BBox.from.ToVec();
-       
+
+        if (search_above_below && m_AudioSrc && DropSfx != null)
+        {
+            //m_AudioSrc.PlayOneShot(DropSfx);
+        }
+
         _material.SetInt("_InHouseGrid", _parentGrid == Game.I.HouseGrid ? 1 : 0);
         
         if (search_above_below)
@@ -211,7 +225,12 @@ public class Block : MonoBehaviour
     {
         if (!canBeMoved) return;
 
-        RemoveFromGridAndSever();
+        if (m_AudioSrc && GrabSfx != null)
+        {
+          m_AudioSrc.PlayOneShot(GrabSfx);
+        }
+
+    RemoveFromGridAndSever();
 
         _grabbed = true;
         //_grabbedPart = Game.MouseWorldPos.ToIVec() - transform.position.ToIVec();
