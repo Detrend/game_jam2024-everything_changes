@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: _flooding
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: waterCapacity
@@ -86,11 +86,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.0360413
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.8192699
       objectReference: {fileID: 0}
     - target: {fileID: 2665134327413071013, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.z

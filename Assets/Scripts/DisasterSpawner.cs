@@ -45,7 +45,7 @@ public class DisasterSpawner : MonoBehaviour
 
       case DisasterType.Trump:
       {
-        StartCoroutine(SpawnZombieWaves(2, 5));
+        StartCoroutine(SpawnZombieWaves(4, 7));
         break;
       }
 
