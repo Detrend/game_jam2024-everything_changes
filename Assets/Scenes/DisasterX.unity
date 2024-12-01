@@ -240,6 +240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 7832401591170005628, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+      propertyPath: canBeDamaged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8125134233512433420, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: m_Camera
       value: 

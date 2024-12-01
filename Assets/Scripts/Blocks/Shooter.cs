@@ -19,12 +19,15 @@ public class Shooter : Block
   float m_Reload      = 0.0f;
   float m_RotateAngle = 0.0f;
 
-  GameObject m_Gun = null;
+  GameObject m_Gun    = null;
+  GameObject m_Muzzle = null;
 
   private void Awake()
   {
     base.Awake();
-    m_Gun = transform.Find("Gun")?.gameObject;
+    m_Gun    = transform.Find("Gun")?.gameObject;
+    m_Muzzle = m_Gun.transform.Find("muzzle")?.gameObject;
+    m_Muzzle.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
   }
 
   private void OnDrawGizmosSelected()
@@ -95,6 +98,15 @@ public class Shooter : Block
     else
     {
       m_Gun.transform.rotation = transform.rotation;
+    }
+
+    if ((m_Reload / ReloadTime) > 0.8f)
+    {
+      m_Muzzle.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+    }
+    else
+    {
+      m_Muzzle.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
     }
 
     // get best possible target
