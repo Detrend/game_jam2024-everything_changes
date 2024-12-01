@@ -53,6 +53,8 @@ public class ScreenShaker : MonoBehaviour
 {
     List<ScreenShake> _shakes = new();
     Vector3 m_InitialCameraPos = Vector3.zero;
+    Vector2 move;
+    public Vector2 Move => move;
 
     void Awake()
     {
@@ -77,8 +79,8 @@ public class ScreenShaker : MonoBehaviour
             //  max         = Mathf.Max(max, shake.amount * shake.time / shake.maxTime);
             //}
 
-            Vector2 dif = Vector2.zero;
-            foreach (ScreenShake s in _shakes) dif += s.Update();
+            move = Vector2.zero;
+            foreach (ScreenShake s in _shakes) move += s.Update();
 
             //float spd = 1.5f;
 
@@ -88,7 +90,7 @@ public class ScreenShaker : MonoBehaviour
             //var axis4 = new Vector3(0.4f, -0.3f, 0.0f) * Mathf.Sin(Time.time * 13.2f * spd) * max * 0.1f;
             //var axis5 = new Vector3(0.1f, 0.5f, 0.0f)  * Mathf.Sin(Time.time * 20.0f * spd) * max;
 
-            Camera.main.transform.position = m_InitialCameraPos + (Vector3) dif;// + axis3 + axis4 + axis5) * 0.2f;
+            Camera.main.transform.position = m_InitialCameraPos + (Vector3) move;// + axis3 + axis4 + axis5) * 0.2f;
       }
 
     public float CurrentMagnitude()
