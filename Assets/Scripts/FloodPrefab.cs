@@ -40,52 +40,38 @@ public class FloodPrefab : MonoBehaviour
         {
             current_width = Mathf.Max(0f, current_width - 0.4f * Time.deltaTime);
         }
+
+        var emm = _ps.emission;
+        emm.rateOverTime = (int) (current_width * maxWidth * 200); 
+
+
         var sh = _ps.shape;
         sh.position = new Vector3(15, -2 + maxWidth * current_width / 2, 0);
         sh.scale = new Vector3(1f, maxWidth * current_width, 1f);
 
-
         int num_particles = _ps.GetParticles(_particles);
+
+        int write_i = 0;
         for (int i = 0; i < num_particles; i++)
         {
+            
             IVector2 ip = _particles[i].position.ToIVec();
             BlockRecord br = Game.I.HouseGrid[ip];
             if (br != null)
             {
                 Flooding f = br.block.Flooding;
-                if (f != null && _particles[i].totalVelocity.sqrMagnitude > 1)
+                if (f != null)
                 {
                     f.FloodingAmount += floodingStrength;
                 }
-                _particles[i].velocity = new Vector3(5, 0, 0);
+            }
+            else
+            {
+                _particles[write_i++] = _particles[i];
             }
         }
-        _ps.SetParticles(_particles);
+        _ps.SetParticles(_particles, write_i);
 
-        if (current_width == 0f && remaining_duration  + 30f < 0f) Destroy(this); 
-
-
-        //for (int yi = 0; yi < maxWidth; yi++)
-        //{
-        //    int y = -2 + yi;
-        //    float strength = Mathf.Clamp01(current_width * maxWidth - yi);
-        //    for (int x = Game.I.gameRegion.to.X - 1; x >= Game.I.gameRegion.from.X; x--)
-        //    {
-        //        if ((distanceX - x) / speedX > Time.time - startTime) break;
-        //        IVector2 v = new(x, y);
-        //        BlockRecord br = Game.I.HouseGrid[v];
-        //        if (br != null)
-        //        {
-        //            var fl = br.block.Flooding;
-        //            if (fl != null)
-        //            {
-        //                fl.FloodingAmount += floodingStrength * Time.deltaTime * strength;
-        //            }
-        //            break;
-        //        }
-        //    }
-        //}
-
-        
+        if (num_particles == 0 && remaining_duration < 0f) Destroy(this);
     }
 }
