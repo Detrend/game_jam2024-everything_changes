@@ -17,6 +17,7 @@ public struct BoxSearchData
 public enum BlockType
 {
     ROOF, SENTRY, TOILET_PAPER
+    , COUNT // keep count at the end 
 }
 
 
