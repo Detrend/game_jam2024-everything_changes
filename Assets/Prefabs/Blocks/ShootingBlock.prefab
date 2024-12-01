@@ -313,6 +313,7 @@ MonoBehaviour:
   canBeMoved: 1
   canBeDamaged: 1
   isSolid: 0
+  _parentGrid: {fileID: 0}
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 1214345876742077007}
@@ -342,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d503ac8036d52c459ba4ef7dee03de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flooding: 0.5
+  _flooding: 0
   waterCapacity: 1
   waveAmount: 1
   floodingLimit: 0.3
