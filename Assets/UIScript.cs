@@ -28,7 +28,11 @@ public class UIScript : MonoBehaviour
 
   public void OnDisasterStarted(DisasterType type, int id)
   {
-    m_Icons.Remove(id);
+    if (m_Icons.ContainsKey(id))
+    {
+      Destroy(m_Icons[id]);
+      m_Icons.Remove(id);
+    }
   }
 
   void Start()
