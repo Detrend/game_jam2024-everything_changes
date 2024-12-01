@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using static Unity.Collections.AllocatorManager;
-using static UnityEditor.PlayerSettings;
 
 public class Ufo : MonoBehaviour
 {

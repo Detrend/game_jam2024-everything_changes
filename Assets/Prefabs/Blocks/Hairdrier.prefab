@@ -300,6 +300,10 @@ PrefabInstance:
       propertyPath: isSolid
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8434703151016782859, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_Volume
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
     m_RemovedGameObjects: []
