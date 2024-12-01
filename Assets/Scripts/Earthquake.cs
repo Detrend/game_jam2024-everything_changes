@@ -19,10 +19,14 @@ public class Earthquake : MonoBehaviour
   [SerializeField]
   float earthquakeStrength = 1.0f;
 
+  [SerializeField]
+  AudioClip _earthquakeSfx;
+
     ScreenShake _earthquakeScreenShake;
 
   void Start()
   {
+        GetComponent<AudioSource>().PlayOneShot(_earthquakeSfx);
         m_TimeRemaining = Duration;
         _earthquakeScreenShake = new(0.4f)
         {
