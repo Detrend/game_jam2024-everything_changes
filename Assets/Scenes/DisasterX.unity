@@ -274,141 +274,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[1].disaster
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[2].disaster
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[3].disaster
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[4].disaster
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[5].disaster
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[6].disaster
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[0].probability
-      value: 0.0667
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[1].probability
-      value: 0.0061
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[2].probability
-      value: 0.0283
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[3].probability
-      value: 0.0222
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[4].probability
-      value: 0.0261
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[5].probability
-      value: 0.0217
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[6].probability
-      value: 0.0067
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[1].selfCooldown
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[2].selfCooldown
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[3].selfCooldown
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[4].selfCooldown
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[5].selfCooldown
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[6].selfCooldown
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[2].intervalStart
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[2].otherCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[3].otherCooldown
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[4].intervalStart
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[5].intervalStart
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[5].otherCooldown
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: Probabilities.Array.data[6].intervalStart
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 725682635}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.AudioSource, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3239083367718243594, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: m_Name
       value: Game
@@ -417,13 +285,8 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1133453500}
-    - target: {fileID: 8490867555999046513, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
-      propertyPath: RainObject
-      value: 
-      objectReference: {fileID: 3401781718462181934, guid: 6f0d8787ff4c41143aedf5fffa65af70, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7981436954861266811, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
