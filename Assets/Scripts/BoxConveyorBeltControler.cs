@@ -40,6 +40,7 @@ public class BoxConveyorBeltControler : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.velocity = Vector2.zero;
         rb.freezeRotation = true;
+        transform.rotation = Quaternion.identity;
         // remove this script from the box
         Destroy(this);
     }
