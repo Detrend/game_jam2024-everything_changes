@@ -12,6 +12,9 @@ public class ConveyorBelt : MonoBehaviour
     private AudioSource _audioSource;
 
     [SerializeField]
+    private AudioClip _conveyorBeltSfx;
+
+    [SerializeField]
     private float _spawningFrequency = 8f;
     private float _timeSinceLastSpawn = Single.MinValue;
 
@@ -41,6 +44,7 @@ public class ConveyorBelt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _startTime = Time.time;
         _spawnPoint = spawnPoint.transform.position;
         if(false)
@@ -98,6 +102,8 @@ public class ConveyorBelt : MonoBehaviour
         {
             _timeSinceLastSpawn = Time.time;
             SpawnBlock();
+            _audioSource.clip = _conveyorBeltSfx;
+            _audioSource.Play();
         }
     }
 
