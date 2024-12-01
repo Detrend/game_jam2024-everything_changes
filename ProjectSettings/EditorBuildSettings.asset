@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Disaster.unity
     guid: 56e13b938f6b5b94381257466943a8bc
   - enabled: 1
-    path: Assets/Scenes/Silva/AKTMainMenu 1.unity
+    path: Assets/Scenes/Silva/MainMenu.unity
     guid: bc1f858a69aa41f4bbfbec606ed76fcc
   - enabled: 1
     path: Assets/Scenes/Silva/DisasterX 1.unity
