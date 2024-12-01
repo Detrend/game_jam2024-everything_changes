@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ShootingBlockFlooding : Flooding
 {
+    
     public float floodingLimit = 0.3f;
+    public float exhaustUpperLimit = 0.8f;
+
 
     public float volumePerParticle = 0.01f;
     float _currentParticleProgress = 0f;
@@ -40,7 +43,7 @@ public class ShootingBlockFlooding : Flooding
                     _currentParticleProgress -= volumePerParticle;
                     ParticleSystem.EmitParams ps = new()
                     {
-                        position = transform.position + new Vector3(.5f, FloodingAmount * 0.7f - 0.3f),
+                        position = transform.position + new Vector3(.5f, Mathf.Min(exhaustUpperLimit, FloodingAmount) * 0.9f + 0.1f - 1f),
                         velocity = new Vector3(Random.Range(0.1f, 0.4f), 0f, 0f)
                         //startLifetime = time
                     };

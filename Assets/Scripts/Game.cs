@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Game : MonoBehaviour
 {
@@ -149,7 +149,13 @@ public class Game : MonoBehaviour
     }
 
 
-
+    public static IVector2 RandomGridPosition(IVector2 size)
+    {
+        return new IVector2(
+            UnityEngine.Random.Range(I.gameRegion.from.X, I.gameRegion.to.X - size.X + 1),
+            UnityEngine.Random.Range(I.gameRegion.from.Y, I.gameRegion.to.Y - size.Y + 1)
+        );
+    }
 
 
 
