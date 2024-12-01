@@ -82,7 +82,7 @@ public class HouseGrid : BlockGrid
         var toilet = GameObject.Find("ToiletPaperBlock");
         if (toilet != null && toilet.TryGetComponent(out Block toiletBlock))
         {
-            toiletBlock.Place(Game.I.HouseGrid, ((Vector2)toiletBlock.transform.position).ToIVec(), false);
+            toiletBlock.Place(Game.I.HouseGrid, ((Vector2)toiletBlock.transform.position).ToIVec(), true);
         }
     }
 
