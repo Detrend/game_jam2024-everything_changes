@@ -302,6 +302,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+      propertyPath: Probabilities.Array.data[0].probability
+      value: 0.0667
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: Probabilities.Array.data[1].probability
       value: 0.0061
       objectReference: {fileID: 0}
