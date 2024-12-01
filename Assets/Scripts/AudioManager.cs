@@ -31,13 +31,14 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
         if(_audioSource.time + 0.25f < _musicClips[currentClip].length && !_audioSource.isPlaying)
         {
             Debug.Log(_musicClips[currentClip].length + "   " + _audioSource.time);
             _audioSource.Play();
             return;
         }
+        */
         if (!_audioSource.isPlaying)
         {
             currentClip++;
