@@ -176,7 +176,11 @@ public class DisasterManager : MonoBehaviour
       return 0.0f;
     }
 
-    return m_Settings[type].probability;
+    // 6 min = 360sec
+    float maxPlayTime = 360.0f;
+    float coeff = Mathf.Clamp(m_TimeSinceLevelStart / maxPlayTime, 0.0f, 1.0f) + 1.0f;
+
+    return m_Settings[type].probability * coeff;
   }
 
   void OnDisasterScheduledInternal(DisasterType type, int id)

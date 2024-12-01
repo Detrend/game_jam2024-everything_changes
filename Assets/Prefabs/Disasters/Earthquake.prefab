@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 5
-  DamagePerSecond: 1
-  DamagePerSecondHeight: 4
+  DamagePerSecond: 0
+  DamagePerSecondHeight: 5
   earthquakeStrength: 0.3
 --- !u!82 &6582963322879181436
 AudioSource:

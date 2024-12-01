@@ -274,6 +274,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+      propertyPath: DebugStartFrom
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 725682635}
@@ -281,10 +285,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 4297575387642741992, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+      propertyPath: gameRegion.from.X
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 8125134233512433420, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1133453500}
+    - target: {fileID: 8490867555999046513, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
+      propertyPath: FloodObject
+      value: 
+      objectReference: {fileID: 4360617672231606634, guid: d4d2c55495a6ae94882b1c36c95d5b49, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1898,6 +1910,10 @@ PrefabInstance:
     - target: {fileID: 5057575254014872448, guid: 3ac610afc04e6ea4a9d5475a34c681b1, type: 3}
       propertyPath: m_Name
       value: ToiletPaperBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018672939967946122, guid: 3ac610afc04e6ea4a9d5475a34c681b1, type: 3}
+      propertyPath: canBeMoved
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9221532201009089981, guid: 3ac610afc04e6ea4a9d5475a34c681b1, type: 3}
       propertyPath: m_LocalPosition.x
