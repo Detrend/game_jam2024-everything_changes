@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class FloodPrefab : MonoBehaviour
@@ -26,6 +27,8 @@ public class FloodPrefab : MonoBehaviour
         speedX = -_ps.velocityOverLifetime.x.constant;
         startTime = Time.time;
         _particles = new ParticleSystem.Particle[_ps.main.maxParticles];
+
+        transform.position = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame

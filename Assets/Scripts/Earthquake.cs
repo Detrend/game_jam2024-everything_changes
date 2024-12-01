@@ -73,6 +73,10 @@ public class Earthquake : MonoBehaviour
       if (!block.boxSearchData.visited)
       {
         int height = block.BBox.from.Y - Game.I.gameRegion.from.Y;
+        if (height == 1)
+        {
+          height -= 1;
+        }
         float dmg = (DamagePerSecond + height * DamagePerSecondHeight) * Time.deltaTime;
         block.DealDamage(dmg);
       }

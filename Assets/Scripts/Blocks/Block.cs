@@ -23,9 +23,7 @@ public enum BlockType
 
 public class Block : MonoBehaviour
 {
-    BBox _BBox;
-
-    public BBox BBox => _BBox;
+    public BBox BBox;
 
     public IVector2 size;
 
@@ -133,8 +131,8 @@ public class Block : MonoBehaviour
         _material = _spriteRenderer.material;
         _material.SetFloat("_BlockWidth", size.X);
 
-        _BBox = new(((Vector2)transform.position).ToIVec(), size);
-        transform.position = _BBox.from.ToVec();
+        BBox = new(((Vector2)transform.position).ToIVec(), size);
+        transform.position = BBox.from.ToVec();
 
         m_AudioSrc = GetComponent<AudioSource>();
     }
@@ -148,14 +146,14 @@ public class Block : MonoBehaviour
 
     public void Place(BlockGrid grid, IVector2 pos, bool search_above_below)
     {
-        _BBox = new BBox(pos, size);
+        BBox = new BBox(pos, size);
         grid.AddBlockAt(this, pos);
         _parentGrid = grid;
 
         for (int child_i = 0; child_i < transform.childCount; child_i++)
             transform.GetChild(child_i).gameObject.SetActive(true);
 
-        transform.position = _BBox.from.ToVec();
+        transform.position = BBox.from.ToVec();
 
         if (search_above_below && m_AudioSrc && DropSfx != null && grid == Game.I.HouseGrid)
         {
