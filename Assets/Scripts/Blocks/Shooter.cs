@@ -94,7 +94,7 @@ public class Shooter : Block
     }
     else
     {
-      m_Gun.transform.rotation = Quaternion.identity;
+      m_Gun.transform.rotation = transform.rotation;
     }
 
     // get best possible target

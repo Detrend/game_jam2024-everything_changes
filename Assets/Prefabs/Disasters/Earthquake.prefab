@@ -47,4 +47,4 @@ MonoBehaviour:
   Duration: 5
   DamagePerSecond: 1
   DamagePerSecondHeight: 4
-  earthquakeStrength: 1
+  earthquakeStrength: 0.3
