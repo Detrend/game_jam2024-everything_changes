@@ -269,6 +269,10 @@ PrefabInstance:
       propertyPath: size.X
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8434703151016782859, guid: aca7cec3889af354581554c5da09baad, type: 3}
+      propertyPath: m_Volume
+      value: 0.55
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
     - {fileID: 2257968924816362115, guid: aca7cec3889af354581554c5da09baad, type: 3}
@@ -323,7 +327,7 @@ MonoBehaviour:
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 1214345876742077007}
-  ShootingRange: 4
+  ShootingRange: 4.5
   ShootingDegree: 55
   DamagePerHit: 25
   ReloadTime: 0.5
