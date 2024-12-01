@@ -126,7 +126,8 @@ public class Shooter : Block
       m_Reload = ReloadTime;
       if (m_Audio && ShootSfx)
       {
-        m_Audio.PlayOneShot(ShootSfx);
+          m_Audio.pitch = Random.Range(0.85f, 1.15f);
+          m_Audio.PlayOneShot(ShootSfx);
       }
     }
   }

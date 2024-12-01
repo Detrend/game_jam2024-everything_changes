@@ -271,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8434703151016782859, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Volume
-      value: 0.55
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
@@ -314,6 +314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c44e080d7c64274d863e21162033d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BBox:
+    from:
+      X: 0
+      Y: 0
+    to:
+      X: 0
+      Y: 0
   size:
     X: 1
     Y: 1
@@ -454,4 +461,5 @@ MonoBehaviour:
   waterCapacity: 1
   waveAmount: 1
   floodingLimit: 0.3
+  exhaustUpperLimit: 0.8
   volumePerParticle: 0.003
