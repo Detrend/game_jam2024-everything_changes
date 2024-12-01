@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
-    path: Assets/Scenes/Disaster.unity
-    guid: 56e13b938f6b5b94381257466943a8bc
   - enabled: 1
     path: Assets/Scenes/Silva/MainMenu.unity
     guid: bc1f858a69aa41f4bbfbec606ed76fcc
@@ -18,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/DisasterX.unity
     guid: 8b2cb8af98f7b2f4982c1a905ed8c28d
   - enabled: 1
-    path: Assets/Scenes/Silva/DisasterX 1.unity
-    guid: df67f1f8c70e26246bc6c6c663c682e4
+    path: Assets/Scenes/Silva/GameOver.unity
+    guid: 32ca90e5883b1684c9a00b81a11432e7
   m_configObjects: {}

@@ -59,7 +59,7 @@ Material:
     - _CoordsToY: 1.05
     - _EnableExternalAlpha: 0
     - _FarWallDistance: 1
-    - _Flood: 1
+    - _Flood: 0.5
     - _TopLevel: 0.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

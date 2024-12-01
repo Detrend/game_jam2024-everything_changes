@@ -146,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: c87a52c7e2c78294fb935acdc100b83d, type: 3}
     - target: {fileID: 1302487811696770249, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1302487811696770249, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalScale.y
@@ -154,11 +154,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302487811696770249, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1302487811696770249, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1916543352150086089, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Enabled
@@ -267,7 +267,7 @@ PrefabInstance:
     - target: {fileID: 6081351460517011371, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 15fdeecffba82c448b85531eba22318f, type: 3}
+      objectReference: {fileID: 21300000, guid: a12b9ac6f8dccd94fa26d0a009ad7fb9, type: 3}
     - target: {fileID: 6081351460517011371, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 6081351460517011371, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5193390feef8c5643922b34bf61a2eb6, type: 2}
+      objectReference: {fileID: 2100000, guid: ccca52e916d1413479dd73f644633af3, type: 2}
     - target: {fileID: 6147762430754339763, guid: aca7cec3889af354581554c5da09baad, type: 3}
       propertyPath: MaxHP
       value: 50
