@@ -275,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: DebugStartFrom
-      value: 500
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1688447008938239828, guid: a001fe4c476c3814c8b1009ca12912ff, type: 3}
       propertyPath: OnDisasterScheduled.m_PersistentCalls.m_Calls.Array.data[2].m_Target
