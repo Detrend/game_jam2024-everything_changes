@@ -178,7 +178,7 @@ public class DisasterManager : MonoBehaviour
 
     // 6 min = 360sec
     float maxPlayTime = 360.0f;
-    float coeff = Mathf.Clamp(m_TimeSinceLevelStart / maxPlayTime, 0.0f, 1.0f) + 1.0f;
+    float coeff = (Mathf.Clamp(m_TimeSinceLevelStart / maxPlayTime, 0.0f, 1.0f) + 1.0f) * 1.5f;
 
     return m_Settings[type].probability * coeff;
   }

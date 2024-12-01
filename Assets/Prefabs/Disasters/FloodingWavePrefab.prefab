@@ -4841,5 +4841,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81f1d36e4dc6cc4bbc86cc3e00f3324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWidth: 3
+  maxWidth: 2
   floodingStrength: 0.001
