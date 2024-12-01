@@ -16,6 +16,9 @@ public class Shooter : Block
   [SerializeField]
   public float ReloadTime = 0.5f;
 
+  [SerializeField]
+  AudioClip ShootSfx;
+
   float m_Reload      = 0.0f;
 
   GameObject m_Gun    = null;
@@ -120,8 +123,11 @@ public class Shooter : Block
     {
       // choose best possible target
       target.DealDamage(DamagePerHit);
-      m_Audio.Play();
       m_Reload = ReloadTime;
+      if (m_Audio && ShootSfx)
+      {
+        m_Audio.PlayOneShot(ShootSfx);
+      }
     }
   }
 }

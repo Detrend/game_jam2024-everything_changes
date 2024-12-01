@@ -5321,7 +5321,7 @@ MonoBehaviour:
     intervalStart: 180
     selfCooldown: 30
     otherCooldown: 0
-  DisasterSpawnAheadTime: 35
+  DisasterSpawnAheadTime: 20
 --- !u!1 &6473368234677923890
 GameObject:
   m_ObjectHideFlags: 0
@@ -10641,6 +10641,7 @@ MonoBehaviour:
   _parentGrid: {fileID: 0}
   GrabSfx: {fileID: 0}
   DropSfx: {fileID: 0}
+  DmgSfx: {fileID: 0}
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 0}

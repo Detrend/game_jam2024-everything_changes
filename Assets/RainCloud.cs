@@ -38,7 +38,7 @@ public class RainCloud : MonoBehaviour
             _rainProgress -= traceFrequency;
             Vector2 start_pos = new(transform.position.x + Random.Range(-10f, 10f), transform.position.y);
             RaycastHit2D hit = Physics2D.Raycast(start_pos, tangent);
-            if (hit.collider.CompareTag("Block"))
+            if (hit.collider != null && hit.collider.CompareTag("Block"))
             {
                 Block b = hit.collider.GetComponent<Block>();
                 if (b.Flooding != null)

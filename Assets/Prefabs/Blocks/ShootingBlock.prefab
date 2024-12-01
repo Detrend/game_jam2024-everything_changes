@@ -317,6 +317,9 @@ MonoBehaviour:
   canBeDamaged: 1
   isSolid: 0
   _parentGrid: {fileID: 0}
+  GrabSfx: {fileID: 0}
+  DropSfx: {fileID: 0}
+  DmgSfx: {fileID: 8300000, guid: 5e24eaa95e8316e4d85739f6339dc9f3, type: 3}
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 1214345876742077007}
@@ -324,6 +327,7 @@ MonoBehaviour:
   ShootingDegree: 55
   DamagePerHit: 25
   ReloadTime: 0.5
+  ShootSfx: {fileID: 8300000, guid: 7c6925f2dac16c745be7e3b43b21c92b, type: 3}
 --- !u!82 &3565862275205513965
 AudioSource:
   m_ObjectHideFlags: 0

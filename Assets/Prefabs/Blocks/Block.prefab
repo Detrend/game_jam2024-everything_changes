@@ -60,6 +60,7 @@ MonoBehaviour:
   _parentGrid: {fileID: 0}
   GrabSfx: {fileID: 8300000, guid: fe30bc0d81d73a54e9e25014acfcbfec, type: 3}
   DropSfx: {fileID: 8300000, guid: fe30bc0d81d73a54e9e25014acfcbfec, type: 3}
+  DmgSfx: {fileID: 8300000, guid: 5e24eaa95e8316e4d85739f6339dc9f3, type: 3}
   blockType: 0
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 6081351460517011371}

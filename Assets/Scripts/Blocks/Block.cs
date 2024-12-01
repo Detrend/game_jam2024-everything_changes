@@ -47,6 +47,9 @@ public class Block : MonoBehaviour
     [SerializeField]
     public AudioClip DropSfx;
 
+    [SerializeField]
+    public AudioClip DmgSfx;
+
     AudioSource m_AudioSrc;
 
     List<Block> _blocksAbove;
@@ -87,6 +90,10 @@ public class Block : MonoBehaviour
     {
         if (!canBeDamaged) return;
         HP = Mathf.Max(HP - dmg, 0f);
+        if (m_AudioSrc && !m_AudioSrc.isPlaying && DmgSfx)
+        {
+          m_AudioSrc.PlayOneShot(DmgSfx);
+        }
     }
 
     public virtual void DealWaterDamage(float amount)
@@ -150,9 +157,9 @@ public class Block : MonoBehaviour
 
         transform.position = _BBox.from.ToVec();
 
-        if (search_above_below && m_AudioSrc && DropSfx != null)
+        if (search_above_below && m_AudioSrc && DropSfx != null && grid == Game.I.HouseGrid)
         {
-            //m_AudioSrc.PlayOneShot(DropSfx);
+            m_AudioSrc.PlayOneShot(DropSfx);
         }
        
         //_material.SetInt("_InHouseGrid", _parentGrid == Game.I.HouseGrid ? 1 : 0);
