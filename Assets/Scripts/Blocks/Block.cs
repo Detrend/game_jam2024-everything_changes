@@ -225,13 +225,21 @@ public class Block : MonoBehaviour
 
     protected void Update()
     {
-        if (HP == 0f && _parentGrid != null)
+        if (HP == 0f)
         {
-            RemoveFromGridAndSever();
-            var rb = gameObject.GetComponent<Rigidbody2D>();
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            _spriteRenderer.sortingOrder = -10;
-            rb.excludeLayers = LayerMask.GetMask("Default");
+            if (_parentGrid != null)
+            {
+                RemoveFromGridAndSever();
+                var rb = gameObject.GetComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                _spriteRenderer.sortingOrder = -10;
+                rb.excludeLayers = LayerMask.GetMask("Default");
+            }
+            else
+            {
+                if (transform.position.y < -20) Destroy(this);
+            }
+            
         }
 
 

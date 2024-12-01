@@ -51,6 +51,8 @@ public class Flooding : MonoBehaviour
 
     protected virtual void MyUpdate()
     {
+        if (FloodingPercent >= 1f)
+            _block.DealDamage(Time.deltaTime * 20f);
         waveAmount *= Mathf.Pow(0.4f, Time.deltaTime);
         float balance = waveAmount * Mathf.Sin(Time.time * 6f);
         _material.SetVector("_RayFrom", new Vector3(rayFrom.x, rayFrom.y * Mathf.Exp(balance), rayFrom.z));
