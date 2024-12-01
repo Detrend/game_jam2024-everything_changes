@@ -318,7 +318,7 @@ MonoBehaviour:
   MaxHP: 100
   foregroundSpriteRenderer: {fileID: 1214345876742077007}
   ShootingRange: 4
-  ShootingDegree: 45
+  ShootingDegree: 55
   DamagePerHit: 25
   ReloadTime: 0.5
 --- !u!4 &6936388152532105537 stripped
