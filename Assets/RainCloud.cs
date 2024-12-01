@@ -41,7 +41,7 @@ public class RainCloud : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Block"))
             {
                 Block b = hit.collider.GetComponent<Block>();
-                if (b.Flooding != null)
+                if (b != null && b.Flooding != null)
                 {
                     b.Flooding.FloodingAmount += rainTraceAmount;
                 }
